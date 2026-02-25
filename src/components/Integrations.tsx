@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Plus } from "lucide-react";
 import zeepsLogo from "@/assets/zeeps-logo-vertical.png";
 
 const integrations = [
@@ -24,35 +25,46 @@ const Integrations = () => {
           </p>
         </motion.div>
 
-        {/* Honeycomb / Hub layout */}
-        <div className="relative max-w-xl mx-auto">
-          {/* Center logo */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="w-20 h-20 mx-auto rounded-2xl gradient-primary flex items-center justify-center shadow-soft mb-8"
-          >
-            <img src={zeepsLogo} alt="Zeeps" className="w-12 h-12 object-contain brightness-0 invert" />
-          </motion.div>
+        {/* Wide card with logo left + integrations right */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="max-w-5xl mx-auto bg-card border border-border rounded-2xl shadow-card overflow-hidden"
+        >
+          <div className="flex flex-col md:flex-row items-center">
+            {/* Left — Zeeps logo big */}
+            <div className="md:w-1/3 flex items-center justify-center p-10 md:p-14 md:border-r border-border">
+              <div className="w-28 h-28 md:w-36 md:h-36 rounded-2xl gradient-primary flex items-center justify-center shadow-soft">
+                <img
+                  src={zeepsLogo}
+                  alt="Zeeps"
+                  className="w-20 h-20 md:w-24 md:h-24 object-contain brightness-0 invert"
+                />
+              </div>
+            </div>
 
-          {/* Grid of integrations around */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {integrations.map((name, i) => (
-              <motion.div
-                key={name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.06 }}
-                className="bg-card border border-border rounded-xl p-4 text-center shadow-card hover:shadow-card-hover transition-shadow duration-300"
-              >
-                <span className="text-sm font-semibold text-foreground">{name}</span>
-              </motion.div>
-            ))}
+            {/* Right — integrations grid */}
+            <div className="md:w-2/3 p-8 md:p-10">
+              <div className="grid grid-cols-3 sm:grid-cols-3 gap-3">
+                {integrations.map((name) => (
+                  <div
+                    key={name}
+                    className="bg-muted/50 border border-border rounded-xl px-4 py-3 text-center hover:bg-muted transition-colors duration-200"
+                  >
+                    <span className="text-sm font-semibold text-foreground">{name}</span>
+                  </div>
+                ))}
+                {/* "More" indicator */}
+                <div className="bg-muted/30 border border-dashed border-border rounded-xl px-4 py-3 flex items-center justify-center gap-1.5 text-muted-foreground">
+                  <Plus className="w-4 h-4" />
+                  <span className="text-sm font-medium">e mais</span>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

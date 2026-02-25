@@ -138,4 +138,14 @@
   .shadow-card-hover:hover {
     box-shadow: var(--shadow-card-hover);
   }
+
+  .bg-proof {
+    background-color: hsl(var(--proof-bg));
+  }
+
+  .from-proof {
+    --tw-gradient-from: hsl(var(--proof-bg));
+    --tw-gradient-to: hsl(var(--proof-bg) / 0);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+  }
 }
