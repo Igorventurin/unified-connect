@@ -139,7 +139,7 @@ const Testimonials = () => {
     <section
       id="depoimentos"
       aria-labelledby="testimonials-heading"
-      className="py-20 lg:py-28 bg-proof overflow-hidden"
+      className="py-12 lg:py-16 bg-proof overflow-hidden"
     >
       <div className="container mx-auto px-4 lg:px-8">
         <motion.div
@@ -160,7 +160,11 @@ const Testimonials = () => {
           </p>
         </motion.div>
 
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
           className="flex justify-center gap-6 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)] max-h-[740px] overflow-hidden"
           role="region"
           aria-label="Depoimentos em rolagem"
@@ -168,7 +172,7 @@ const Testimonials = () => {
           <TestimonialsColumn testimonials={firstColumn} duration={15} />
           <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={19} />
           <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={17} />
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,28 +1,34 @@
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import policyPdf from "@/assets/politica_privacidade.pdf";
 
 const Privacy = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
       <main className="flex-1 pt-28 pb-16">
-        <div className="container mx-auto px-4 lg:px-8 max-w-3xl">
-          <h1 className="text-3xl font-bold text-foreground mb-8">Política de Privacidade</h1>
-          <div className="prose prose-sm text-muted-foreground space-y-4 leading-relaxed">
-            <p>
-              A Zeeps está comprometida com a proteção dos dados pessoais de seus usuários, em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018).
-            </p>
-            <h2 className="text-lg font-semibold text-foreground mt-6">1. Dados Coletados</h2>
-            <p>Coletamos nome, e-mail corporativo, telefone e nome da empresa quando você preenche nosso formulário de contato.</p>
-            <h2 className="text-lg font-semibold text-foreground mt-6">2. Finalidade</h2>
-            <p>Os dados são utilizados exclusivamente para entrar em contato com você sobre nossos serviços e enviar informações relevantes.</p>
-            <h2 className="text-lg font-semibold text-foreground mt-6">3. Compartilhamento</h2>
-            <p>Não compartilhamos seus dados com terceiros, exceto quando necessário para a prestação dos nossos serviços ou por exigência legal.</p>
-            <h2 className="text-lg font-semibold text-foreground mt-6">4. Contato do DPO</h2>
-            <p>Para dúvidas sobre privacidade, entre em contato: dpo@zeeps.com.br</p>
+        <div className="container mx-auto px-4 lg:px-8 max-w-5xl">
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-3xl font-bold text-foreground">Política de Privacidade</h1>
+            <a
+              href={policyPdf}
+              download="Politica_Privacidade_Zeeps.pdf"
+              className="text-sm font-semibold bg-primary/10 text-primary hover:bg-primary/20 transition-colors px-4 py-2 rounded-lg"
+            >
+              Baixar PDF
+            </a>
           </div>
-          <Link to="/" className="inline-block mt-8 text-sm text-primary hover:underline">
+
+          <div className="bg-white rounded-xl shadow-sm border border-border overflow-hidden h-[75vh]">
+            <iframe
+              src={`${policyPdf}#toolbar=0&view=FitH`}
+              title="Política de Privacidade Zeeps"
+              className="w-full h-full border-none"
+            />
+          </div>
+
+          <Link to="/" className="inline-block mt-8 text-sm font-medium text-primary hover:underline">
             ← Voltar ao início
           </Link>
         </div>

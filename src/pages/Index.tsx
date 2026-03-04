@@ -7,6 +7,7 @@ import Integrations from "@/components/Integrations";
 import Testimonials from "@/components/Testimonials";
 import About from "@/components/About";
 import ContactForm from "@/components/ContactForm";
+import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
@@ -16,13 +17,13 @@ const Index = () => {
       <Header />
       <main>
         <HeroSection />
-        <SocialProof />
         <ProductShowcase />
         <Features />
         <Integrations />
         <Testimonials />
         <About />
         <ContactForm />
+        <FAQ />
       </main>
       <Footer />
       <WhatsAppButton />
