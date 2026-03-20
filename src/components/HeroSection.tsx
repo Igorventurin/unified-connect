@@ -87,7 +87,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="flex-1 relative min-h-[320px] lg:min-h-0 -mt-12 -mb-28 md:mt-0 md:mb-0 scale-[1.3] md:scale-100 origin-center"
+              className="flex-1 relative min-h-[320px] lg:min-h-0 mt-4 md:mt-0 -mb-28 md:mb-0 scale-[1.3] md:scale-100 origin-center"
             >
               <SplineScene
                 scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
