@@ -43,13 +43,13 @@ const HeroSection = () => {
     >
       <div className="container mx-auto px-4 lg:px-8 flex-1 flex flex-col justify-center mt-8 pb-8">
         {/* Spline card with spotlight effect */}
-        <div className="relative w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-white/95 backdrop-blur-md min-h-[520px] lg:min-h-[600px] flex-shrink-0">
+        <div className="relative w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-white/95 backdrop-blur-md min-h-fit lg:min-h-[600px] flex-shrink-0">
           <Spotlight
             className="-top-40 left-0 md:left-60 md:-top-20"
             fill="rgb(0 147 61 / 0.15)"
           />
 
-          <div className="flex flex-col lg:flex-row h-full min-h-[520px] lg:min-h-[600px]">
+          <div className="flex flex-col lg:flex-row h-full lg:min-h-[600px]">
             {/* Left content */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
@@ -87,7 +87,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="flex-1 relative min-h-[400px] lg:min-h-0 -mb-20 md:mb-0 scale-[1.3] md:scale-100 origin-center"
+              className="flex-1 relative min-h-[320px] lg:min-h-0 -mt-12 -mb-28 md:mt-0 md:mb-0 scale-[1.3] md:scale-100 origin-center"
             >
               <SplineScene
                 scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
