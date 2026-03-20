@@ -11,6 +11,7 @@ interface VideoPlayerProps {
 export function VideoPlayer({ src, className, poster }: VideoPlayerProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [hasPlayed, setHasPlayed] = useState(false);
     const [progress, setProgress] = useState(0);
     const [isMuted, setIsMuted] = useState(false);
     const [showControls, setShowControls] = useState(false);
@@ -22,6 +23,7 @@ export function VideoPlayer({ src, className, poster }: VideoPlayerProps) {
                 videoRef.current.pause();
             } else {
                 videoRef.current.play();
+                if (!hasPlayed) setHasPlayed(true);
             }
             setIsPlaying(!isPlaying);
         }
@@ -103,7 +105,10 @@ export function VideoPlayer({ src, className, poster }: VideoPlayerProps) {
                     </div>
                 )}
 
-                <div className="relative z-20 space-y-4">
+                <div className={cn(
+                    "relative z-20 space-y-4 transition-opacity duration-300",
+                    (hasPlayed && (showControls || !isPlaying)) ? "opacity-100" : "opacity-0 pointer-events-none"
+                )}>
                     {/* Progress Bar */}
                     <div className="relative group/progress h-1.5 w-full bg-white/20 rounded-full overflow-hidden">
                         <div

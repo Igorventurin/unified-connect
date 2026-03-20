@@ -3,6 +3,7 @@ import { Plus } from "lucide-react";
 import zeepsLogo from "@/assets/zeeps-logo-vertical.png";
 import { VideoPlayer } from "./ui/video-player";
 import ferramentaVideo from "@/assets/ferramenta.mp4";
+import configZeeps from "@/assets/configurações_zeeps.png";
 
 import logoMercadoLivre from "@/assets/integrations/Logotipo_MercadoLivre.png";
 import logoMeta from "@/assets/integrations/Meta-Logo.png";
@@ -114,6 +115,7 @@ const Integrations = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.1 }}
+              className="text-center lg:text-left flex flex-col items-center lg:items-start"
             >
               <div className="inline-block mb-4 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold tracking-wide uppercase">
                 Por dentro
@@ -121,10 +123,10 @@ const Integrations = () => {
               <h3 className="text-3xl lg:text-4xl font-bold text-foreground mb-6 leading-tight">
                 Veja a ferramenta em ação
               </h3>
-              <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+              <p className="text-muted-foreground text-lg leading-relaxed mb-6 max-w-2xl">
                 Acompanhe uma demonstração rápida de como nossa solução simplifica a organização dos seus fluxos, ajudando sua equipe a manter o foco em escalar resultados com um atendimento hiper-eficiente.
               </p>
-              <ul className="space-y-4">
+              <ul className="space-y-4 text-left inline-block">
                 <li className="flex items-start gap-3 text-muted-foreground text-[17px]">
                   <span className="text-primary mt-[2px] font-bold">✓</span> Interface amigável focada em produtividade
                 </li>
@@ -147,6 +149,7 @@ const Integrations = () => {
             >
               <VideoPlayer
                 src={ferramentaVideo}
+                poster={configZeeps}
                 className="shadow-[0_24px_60px_rgba(0,0,0,0.12)] rounded-2xl"
               />
             </motion.div>

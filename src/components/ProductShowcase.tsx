@@ -243,6 +243,7 @@ const ProductShowcase = () => {
             >
               <VideoPlayer
                 src={conhecaVideo}
+                poster={dashboardImagem}
                 className="shadow-[0_20px_50px_rgba(0,148,81,0.2)]"
               />
             </motion.div>

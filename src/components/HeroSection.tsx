@@ -55,15 +55,15 @@ const HeroSection = () => {
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
-              className="flex-1 p-10 lg:p-16 relative z-10 flex flex-col justify-center items-center lg:items-start text-center lg:text-left"
+              className="flex-1 p-4 md:p-10 lg:p-16 relative z-10 flex flex-col justify-center items-center lg:items-start text-center lg:text-left"
             >
-              <h1 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-[1.1] tracking-tight text-foreground">
+              <h1 className="text-[40px] md:text-5xl xl:text-6xl font-extrabold leading-[1.1] tracking-tight text-foreground">
                 Sua comunicação integrada,{" "}
                 <span className="text-primary block mt-2">
                   sua gestão simplificada.
                 </span>
               </h1>
-              <p className="mt-8 text-lg lg:text-xl text-muted-foreground max-w-xl leading-relaxed mx-auto lg:mx-0">
+              <p className="mt-8 text-xl text-muted-foreground max-w-xl leading-relaxed mx-auto lg:mx-0">
                 Automatize atendimentos no WhatsApp e Redes Sociais com integração total aos maiores ERPs e CRMs do mercado.
               </p>
               <div className="mt-10 flex flex-wrap gap-6 justify-center lg:justify-start">
@@ -87,7 +87,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="flex-1 relative min-h-[400px] lg:min-h-0"
+              className="flex-1 relative min-h-[400px] lg:min-h-0 -mb-20 md:mb-0 scale-[1.3] md:scale-100 origin-center"
             >
               <SplineScene
                 scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
