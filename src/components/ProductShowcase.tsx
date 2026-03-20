@@ -63,8 +63,8 @@ const ProductShowcase = () => {
               key={s.title}
               onClick={() => setActive(i)}
               className={`relative px-5 py-2 rounded-full text-sm font-medium border transition-all duration-300 overflow-hidden ${active === i
-                ? "bg-primary text-white border-primary shadow-md"
-                : "bg-white text-muted-foreground border-border hover:border-primary hover:text-primary"
+                ? "gradient-primary text-white border-transparent shadow-md"
+                : "bg-white text-muted-foreground border-border hover:border-[#009245] hover:text-[#009245]"
                 }`}
             >
               {s.title}

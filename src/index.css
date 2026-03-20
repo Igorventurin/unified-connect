@@ -93,8 +93,8 @@
     --sidebar-ring: 153 100% 29%;
 
     /* Custom Zeeps tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(153, 100%, 29%), hsl(174, 100%, 33%));
-    --gradient-primary-hover: linear-gradient(135deg, hsl(153, 100%, 24%), hsl(174, 100%, 28%));
+    --gradient-primary: linear-gradient(to right, #4f5954, #009245);
+    --gradient-primary-hover: linear-gradient(to right, #3d4541, #007a39);
     --gradient-subtle: linear-gradient(135deg, hsl(174, 60%, 95%), hsl(153, 60%, 95%));
     --glass-bg: hsla(0, 0%, 100%, 0.8);
     --glass-border: hsla(0, 0%, 100%, 0.3);

@@ -89,6 +89,7 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "scroll-logos": "scroll-logos 30s linear infinite",
+        "scroll-logos-mobile": "scroll-logos 15s linear infinite",
         "spotlight": "spotlight 2s ease .75s 1 forwards",
       },
     },

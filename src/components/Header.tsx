@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import zeepsLogo from "@/assets/zeeps-logo.png";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
 
 const navLinks = [
   { label: "Funcionalidades", href: "/#funcionalidades" },
@@ -47,17 +48,31 @@ const Header = () => {
           ))}
         </nav>
 
-        {/* Button / CTA on the right */}
-        <a
-          href="/#contato"
-          className="hidden md:inline-flex gradient-primary text-primary-foreground px-6 py-3 rounded-lg text-base font-semibold hover:opacity-90 transition-opacity shrink-0"
-        >
-          Falar com Consultor
-        </a>
+        {/* Right side: Socials + CTA */}
+        <div className="hidden md:flex items-center gap-6 shrink-0">
+          <div className="flex items-center gap-4">
+            <a href="https://www.facebook.com/profile.php?id=100084110093569" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <Facebook className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
+            </a>
+            <a href="https://www.instagram.com/zeeps.com.br" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <Instagram className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
+            </a>
+            <a href="https://www.linkedin.com/company/zeeps-br/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <Linkedin className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
+            </a>
+          </div>
+
+          <a
+            href="/#contato"
+            className="gradient-primary text-primary-foreground px-6 py-3 rounded-lg text-base font-semibold hover:opacity-90 transition-opacity"
+          >
+            Falar com Consultor
+          </a>
+        </div>
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="md:hidden flex flex-col gap-1.5 p-2 ml-auto"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Menu"
         >

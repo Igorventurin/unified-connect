@@ -98,6 +98,22 @@ const Features = () => {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-14 text-center"
+        >
+          <a
+            href="/#contato"
+            className="gradient-primary text-white px-8 py-4 rounded-xl text-lg font-bold hover:opacity-90 transition-all hover:scale-105 shadow-soft inline-block"
+          >
+            Começar agora
+          </a>
+        </motion.div>
       </div>
     </section>
   );

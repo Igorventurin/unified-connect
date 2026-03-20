@@ -140,9 +140,9 @@ const ContactForm = () => {
               disabled={isSubmitting}
               className="w-full py-3.5 rounded-xl font-semibold text-base transition-all duration-200 hover:opacity-90 active:scale-[0.98] mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
               style={{
-                background: "linear-gradient(135deg, hsl(153,100%,29%), hsl(174,100%,33%))",
+                background: "linear-gradient(to right, #4f5954, #009245)",
                 color: "#fff",
-                boxShadow: "0 8px 24px -4px hsla(153,100%,29%,0.45)",
+                boxShadow: "0 8px 24px -4px rgba(0, 146, 69, 0.45)",
               }}
             >
               {isSubmitting ? "Redirecionando..." : "Solicitar Demonstração"}

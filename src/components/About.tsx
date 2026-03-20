@@ -4,7 +4,8 @@ import logoVertical from "@/assets/zeeps-logo-vertical.png";
 
 const About = () => {
   return (
-    <section id="sobre" className="py-12 lg:py-16 overflow-hidden">
+    <>
+      <section id="sobre" className="py-12 lg:py-16 overflow-hidden">
       <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
 
@@ -193,7 +194,33 @@ const About = () => {
           </motion.div>
         </div>
       </div>
-    </section>
+      </section>
+
+      {/* Elfsight Instagram Feed */}
+      <section className="py-12 lg:py-16 bg-[#fafafa]">
+        <div className="container mx-auto px-4 lg:px-8 max-w-7xl text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-10"
+          >
+            <span className="inline-block text-sm font-semibold uppercase tracking-widest text-primary mb-4">
+              Nossas Redes
+            </span>
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
+              Acompanhe a Zeeps no Instagram
+            </h2>
+            <p className="mt-4 text-muted-foreground text-lg max-w-2xl mx-auto">
+              Siga nosso perfil e fique por dentro das novidades, atualizações e dicas para escalar seu atendimento.
+            </p>
+          </motion.div>
+          
+          <div className="elfsight-app-609802d7-2696-4d81-b454-349a9c0f8780" data-elfsight-app-lazy></div>
+        </div>
+      </section>
+    </>
   );
 };
 

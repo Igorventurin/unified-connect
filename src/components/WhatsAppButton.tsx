@@ -13,7 +13,7 @@ const WhatsAppButton = () => {
         width: "60px",
         height: "60px",
         borderRadius: "50%",
-        backgroundColor: "#25D366",
+        background: "linear-gradient(to right, #4f5954, #009245)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
