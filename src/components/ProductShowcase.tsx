@@ -6,20 +6,32 @@ import conhecaVideo from "@/assets/conheça.mp4";
 
 const slides = [
   {
-    title: "Multi-atendimento",
-    desc: "Gerencie dezenas de conversas simultâneas com eficiência. Distribua atendimentos automaticamente entre sua equipe e acompanhe tudo em tempo real.",
+    title: "Agentes de IA que vendem",
+    desc: "Sua IA entende o cliente, qualifica o interesse e conduz o primeiro contato sozinha, 24 horas por dia.",
   },
   {
-    title: "Fluxo de Chatbot",
-    desc: "Crie automações visuais sem nenhuma linha de código. Monte jornadas completas de atendimento com arrastar e soltar.",
+    title: "Sua equipe inteira, um único WhatsApp",
+    desc: "Acabe com a bagunça de vários números: todos os atendentes trabalham juntos, com histórico compartilhado.",
   },
   {
-    title: "Relatórios em Tempo Real",
-    desc: "Acompanhe métricas de desempenho da sua equipe. Visualize dados de atendimento, tempo de resposta e satisfação do cliente.",
+    title: "O cliente certo, no setor certo",
+    desc: "Encaminhamento automático para o departamento certo, sem intervenção manual e sem cliente perdido no meio do caminho.",
+  },
+  {
+    title: "Decisões com dados, não com achismo",
+    desc: "Acompanhe a performance da equipe em tempo real e tome decisões melhores com métricas de verdade.",
+  },
+  {
+    title: "Follow-up que nunca esquece",
+    desc: "Agende lembretes e retornos automáticos e nunca mais perca uma oportunidade por falha humana.",
+  },
+  {
+    title: "Sua operação, do seu jeito",
+    desc: "Conecte a Zeeps a qualquer sistema com uma API aberta e flexível, sem depender só de integrações prontas.",
   },
 ];
 
-const INTERVAL = 5000;
+const INTERVAL = 6000;
 
 const ProductShowcase = () => {
   const [active, setActive] = useState(0);
@@ -43,10 +55,10 @@ const ProductShowcase = () => {
           className="text-center max-w-2xl mx-auto mb-10"
         >
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
-            Uma interface intuitiva para operações robustas
+            Todas as soluções em uma interface simples
           </h2>
           <p className="mt-4 text-muted-foreground text-lg">
-            Tenha o controle total da sua equipe em um único lugar.
+            Descubra como cada funcionalidade pode transformar sua operação de atendimento.
           </p>
         </motion.div>
 

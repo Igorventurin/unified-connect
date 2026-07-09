@@ -1,131 +1,62 @@
 import { motion } from "framer-motion";
-import { SplineScene } from "@/components/ui/splite";
-import { Spotlight } from "@/components/ui/spotlight";
-import { GradientBackground } from "@/components/ui/gradient-background";
-
-import logoAcopara from "@/assets/logo_clientes/acopara.png";
-import logoBarao from "@/assets/logo_clientes/barao.png";
-import logoBelma from "@/assets/logo_clientes/belma.png";
-import logoCapul from "@/assets/logo_clientes/capul.png";
-import logoDeledela from "@/assets/logo_clientes/deledela.png";
-import logoFokus from "@/assets/logo_clientes/fokus.png";
-import logoFribel from "@/assets/logo_clientes/fribel.png";
-import logoGees from "@/assets/logo_clientes/gees.png";
-import logoGoiais from "@/assets/logo_clientes/goiais.png";
-import logoMarajo from "@/assets/logo_clientes/marajo.png";
-import logoMilhao from "@/assets/logo_clientes/milhao.png";
-import logoNortesul from "@/assets/logo_clientes/nortesul.png";
-import logoPerola from "@/assets/logo_clientes/perola.png";
-import logoUp from "@/assets/logo_clientes/up.png";
-
-const logos = [
-  { src: logoAcopara, alt: "Acopara" },
-  { src: logoBarao, alt: "Barao" },
-  { src: logoBelma, alt: "Belma" },
-  { src: logoCapul, alt: "Capul" },
-  { src: logoDeledela, alt: "Deledela" },
-  { src: logoFokus, alt: "Fokus" },
-  { src: logoFribel, alt: "Fribel" },
-  { src: logoGees, alt: "Gees" },
-  { src: logoGoiais, alt: "Goiais" },
-  { src: logoMarajo, alt: "Marajo" },
-  { src: logoMilhao, alt: "Milhao" },
-  { src: logoNortesul, alt: "Nortesul" },
-  { src: logoPerola, alt: "Perola" },
-  { src: logoUp, alt: "Up" },
-];
+import heroMockupDesktop from "@/assets/hero_mockup.png";
+import heroMockupMobile from "@/assets/hero_mockup_mobile.png";
 
 const HeroSection = () => {
   return (
-    <GradientBackground
-      className="relative min-h-screen pt-20 flex flex-col justify-between"
-      animationDuration={25}
-    >
-      <div className="container mx-auto px-4 lg:px-8 flex-1 flex flex-col justify-center mt-8 pb-8">
-        {/* Spline card with spotlight effect */}
-        <div className="relative w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-white/95 backdrop-blur-md min-h-fit lg:min-h-[600px] flex-shrink-0">
-          <Spotlight
-            className="-top-40 left-0 md:left-60 md:-top-20"
-            fill="rgb(0 147 61 / 0.15)"
-          />
-
-          <div className="flex flex-col lg:flex-row h-full lg:min-h-[600px]">
-            {/* Left content */}
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              className="flex-1 p-4 md:p-10 lg:p-16 relative z-10 flex flex-col justify-center items-center lg:items-start text-center lg:text-left"
-            >
-              <h1 className="text-[40px] md:text-5xl xl:text-6xl font-extrabold leading-[1.1] tracking-tight text-foreground">
-                Sua comunicação integrada,{" "}
-                <span className="text-primary block mt-2">
-                  sua gestão simplificada.
-                </span>
-              </h1>
-              <p className="mt-8 text-xl text-muted-foreground max-w-xl leading-relaxed mx-auto lg:mx-0">
-                Automatize atendimentos no WhatsApp e Redes Sociais com integração total aos maiores ERPs e CRMs do mercado.
-              </p>
-              <div className="mt-10 flex flex-wrap gap-6 justify-center lg:justify-start">
-                <a
-                  href="#contato"
-                  className="gradient-primary text-primary-foreground px-7 py-3.5 rounded-xl text-base font-bold hover:opacity-90 transition-all hover:scale-105 shadow-soft"
-                >
-                  Começar agora
-                </a>
-                <a
-                  href="#produto"
-                  className="bg-white border-2 border-black text-foreground px-7 py-3.5 rounded-xl text-base font-bold hover:bg-gray-100 transition-all hover:scale-105"
-                >
-                  Ver plataforma
-                </a>
-              </div>
-            </motion.div>
-
-            {/* Right — Spline 3D scene */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="flex-1 relative min-h-[320px] lg:min-h-0 mt-4 md:mt-0 -mb-28 md:mb-0 scale-[1.3] md:scale-100 origin-center"
-            >
-              <SplineScene
-                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                className="w-full h-full"
-              />
-            </motion.div>
-          </div>
-        </div>
+    <section className="relative z-0 min-h-[600px] md:min-h-screen pt-20 flex items-center overflow-hidden">
+      {/* Imagem da plataforma como fundo da Hero */}
+      <div className="absolute inset-0 -z-10">
+        <img
+          src={heroMockupDesktop}
+          alt=""
+          aria-hidden="true"
+          className="hidden md:block w-full h-full object-cover object-[85%_center]"
+        />
+        <img
+          src={heroMockupMobile}
+          alt=""
+          aria-hidden="true"
+          className="md:hidden w-full h-full object-cover object-[90%_top]"
+        />
+        {/* Overlay para legibilidade do texto à esquerda — branco */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white from-0% via-white via-50% to-transparent to-80%" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white from-0% via-white/80 via-35% to-transparent to-70% md:hidden" />
       </div>
 
-      {/* Bottom Logos Carousel */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
-        className="w-full flex-shrink-0 z-10 pb-6"
-      >
-        <div className="container mx-auto px-4 lg:px-8">
-          <p className="text-center text-sm font-medium text-zinc-900 mb-8 mt-2">
-            Empresas que confiam na Zeeps para escalar seu atendimento
+      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="max-w-xl"
+        >
+          <h1 className="text-[40px] md:text-5xl xl:text-6xl font-extrabold leading-[1.1] tracking-tight text-foreground">
+            Sua comunicação integrada,{" "}
+            <span className="text-primary block mt-2">
+              sua gestão simplificada.
+            </span>
+          </h1>
+          <p className="mt-8 text-xl text-muted-foreground max-w-lg leading-relaxed">
+            Automatize atendimentos no WhatsApp e Redes Sociais com integração total aos maiores ERPs e CRMs do mercado.
           </p>
-        </div>
-
-        {/* Carousel Wrapper with CSS Mask for edge fading over any background */}
-        <div className="relative w-full [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-          <div className="flex animate-scroll-logos-mobile md:animate-scroll-logos whitespace-nowrap">
-            {[...logos, ...logos, ...logos].map((logo, i) => (
-              <div
-                key={i}
-                className="inline-flex items-center justify-center mx-3 sm:mx-4 min-w-[100px] sm:min-w-[120px] h-12 px-4 rounded-xl bg-zinc-100/80 border border-zinc-200 hover:bg-white transition-all duration-300 select-none backdrop-blur-sm shadow-sm"
-              >
-                <img src={logo.src} alt={logo.alt} className="w-auto h-8 max-w-[100px] object-contain opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0 mix-blend-multiply" />
-              </div>
-            ))}
+          <div className="mt-10 flex flex-wrap gap-6">
+            <a
+              href="/#contato"
+              className="gradient-primary text-primary-foreground px-7 py-3.5 rounded-xl text-base font-bold hover:opacity-90 transition-all hover:scale-105 shadow-soft"
+            >
+              Começar agora
+            </a>
+            <a
+              href="/#produto"
+              className="bg-white border-2 border-black text-foreground px-7 py-3.5 rounded-xl text-base font-bold hover:bg-gray-100 transition-all hover:scale-105"
+            >
+              Ver plataforma
+            </a>
           </div>
-        </div>
-      </motion.div>
-    </GradientBackground>
+        </motion.div>
+      </div>
+    </section>
   );
 };
 

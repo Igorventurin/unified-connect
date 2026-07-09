@@ -7,6 +7,12 @@ import Index from "./pages/Index";
 import Privacy from "./pages/Privacy";
 import ThankYou from "./pages/ThankYou";
 import NotFound from "./pages/NotFound";
+import Institucional from "./pages/Institucional";
+import Segmento from "./pages/Segmento";
+import Funcionalidades from "./pages/Funcionalidades";
+import Planos from "./pages/Planos";
+import Contato from "./pages/Contato";
+import Blog from "./pages/Blog";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +24,12 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/institucional" element={<Institucional />} />
+          <Route path="/segmentos/:slug" element={<Segmento />} />
+          <Route path="/funcionalidades" element={<Funcionalidades />} />
+          <Route path="/planos" element={<Planos />} />
+          <Route path="/contato" element={<Contato />} />
+          <Route path="/blog" element={<Blog />} />
           <Route path="/privacidade" element={<Privacy />} />
           <Route path="/obrigado" element={<ThankYou />} />
           <Route path="*" element={<NotFound />} />

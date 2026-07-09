@@ -1,11 +1,12 @@
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
+import LogoCarousel from "@/components/LogoCarousel";
 import SocialProof from "@/components/SocialProof";
 import ProductShowcase from "@/components/ProductShowcase";
 import Features from "@/components/Features";
+import PlanosPreview from "@/components/PlanosPreview";
 import Integrations from "@/components/Integrations";
 import Testimonials from "@/components/Testimonials";
-import About from "@/components/About";
 import ContactForm from "@/components/ContactForm";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
@@ -17,11 +18,13 @@ const Index = () => {
       <Header />
       <main>
         <HeroSection />
+        <LogoCarousel />
+        <SocialProof />
         <ProductShowcase />
         <Features />
+        <PlanosPreview />
         <Integrations />
         <Testimonials />
-        <About />
         <ContactForm />
         <FAQ />
       </main>

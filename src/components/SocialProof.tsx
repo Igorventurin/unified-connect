@@ -1,45 +1,63 @@
 import { motion } from "framer-motion";
+import { Users, Smile, ShieldCheck, Database } from "lucide-react";
 
-const logos = [
-  "TOTVS", "RD Station", "Shopify", "Meta", "Vtex", "Bling", "Tiny",
-  "Mercado Livre", "Magalu", "Olist", "Tray", "Nuvemshop",
+// TODO: valores abaixo são placeholders inventados temporariamente.
+// Repor com os números reais assim que o cliente enviar (ver checklist
+// "Materiais que vou precisar de você" no PLANEJAMENTO_AJUSTES.md, Ajuste 2).
+const stats = [
+  {
+    icon: Users,
+    value: "500+",
+    label: "Empresas atendidas",
+  },
+  {
+    icon: Smile,
+    value: "98%",
+    label: "Satisfação dos clientes",
+  },
+  {
+    icon: ShieldCheck,
+    value: "100%",
+    label: "Conformidade com a LGPD",
+  },
+  {
+    icon: Database,
+    value: "10M+",
+    label: "Mensagens processadas por mês",
+  },
 ];
 
 const SocialProof = () => {
   return (
-    <section className="py-12 bg-proof overflow-hidden">
+    <section className="py-14 lg:py-16 bg-proof">
       <div className="container mx-auto px-4 lg:px-8">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center text-lg font-medium text-muted-foreground mb-8"
+          transition={{ duration: 0.6 }}
+          className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6 max-w-5xl mx-auto"
         >
-          Empresas que confiam na Zeeps para escalar seu atendimento
-        </motion.p>
-      </div>
-      <motion.div
-        className="relative"
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-      >
-        {/* Gradient masks on edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-proof to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-proof to-transparent z-10 pointer-events-none" />
-
-        <div className="flex animate-scroll-logos whitespace-nowrap">
-          {[...logos, ...logos, ...logos].map((name, i) => (
-            <div
-              key={i}
-              className="inline-flex items-center justify-center mx-8 min-w-[120px] h-10 px-4 rounded-md text-muted-foreground/50 hover:text-foreground font-semibold text-lg transition-colors duration-300 select-none"
+          {stats.map((s, i) => (
+            <motion.div
+              key={s.label}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="text-center"
             >
-              {name}
-            </div>
+              <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-primary/10 flex items-center justify-center">
+                <s.icon className="w-6 h-6 text-primary" />
+              </div>
+              <p className="text-3xl lg:text-4xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                {s.value}
+              </p>
+              <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
+            </motion.div>
           ))}
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 };

@@ -3,40 +3,40 @@ import { Users, Bot, GitBranch, Code2, Clock, BarChart3 } from "lucide-react";
 
 const features = [
   {
-    icon: Users,
-    title: "Multi-atendentes",
-    desc: "Vários operadores em um único número de WhatsApp.",
-    color: "from-emerald-500/20 to-teal-500/0",
-  },
-  {
     icon: Bot,
-    title: "Agentes de IA",
-    desc: "Inteligência artificial que tria e resolve demandas automaticamente.",
+    title: "Agentes de IA que vendem",
+    desc: "Sua IA entende o cliente, qualifica o interesse e conduz o primeiro contato sozinha, 24 horas por dia.",
     color: "from-green-500/20 to-emerald-500/0",
   },
   {
+    icon: Users,
+    title: "Sua equipe inteira, um único WhatsApp",
+    desc: "Acabe com a bagunça de vários números: todos os atendentes trabalham juntos, com histórico compartilhado.",
+    color: "from-emerald-500/20 to-teal-500/0",
+  },
+  {
     icon: GitBranch,
-    title: "Triagem Automática",
-    desc: "Encaminhe o cliente para o departamento certo sem intervenção humana.",
+    title: "O cliente certo, no setor certo",
+    desc: "Encaminhamento automático para o departamento certo, sem intervenção manual e sem cliente perdido no meio do caminho.",
     color: "from-teal-500/20 to-cyan-500/0",
   },
   {
-    icon: Code2,
-    title: "API Disponível",
-    desc: "Flexibilidade total para desenvolvedores.",
-    color: "from-cyan-500/20 to-blue-500/0",
+    icon: BarChart3,
+    title: "Decisões com dados, não com achismo",
+    desc: "Acompanhe a performance da equipe em tempo real e tome decisões melhores com métricas de verdade.",
+    color: "from-teal-500/20 to-emerald-500/0",
   },
   {
     icon: Clock,
-    title: "Mensagens Agendadas",
-    desc: "Nunca esqueça de um follow-up.",
+    title: "Follow-up que nunca esquece",
+    desc: "Agende lembretes e retornos automáticos e nunca mais perca uma oportunidade por falha humana.",
     color: "from-emerald-500/20 to-green-500/0",
   },
   {
-    icon: BarChart3,
-    title: "Gestão em Tempo Real",
-    desc: "Dashboard com métricas de performance da equipe.",
-    color: "from-teal-500/20 to-emerald-500/0",
+    icon: Code2,
+    title: "Sua operação, do seu jeito",
+    desc: "Conecte a Zeeps a qualquer sistema com uma API aberta e flexível, sem depender só de integrações prontas.",
+    color: "from-cyan-500/20 to-blue-500/0",
   },
 ];
 

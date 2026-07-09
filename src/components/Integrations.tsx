@@ -1,31 +1,16 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Plus } from "lucide-react";
+import { Check } from "lucide-react";
 import zeepsLogo from "@/assets/zeeps-logo-vertical.png";
 import { VideoPlayer } from "./ui/video-player";
 import ferramentaVideo from "@/assets/ferramenta.mp4";
 import configZeeps from "@/assets/configurações_zeeps.png";
-
-import logoMercadoLivre from "@/assets/integrations/Logotipo_MercadoLivre.png";
-import logoMeta from "@/assets/integrations/Meta-Logo.png";
-import logoVtex from "@/assets/integrations/VTEX_Logo.svg.png";
-import logoBling from "@/assets/integrations/logo-bling.png";
-import logoTiny from "@/assets/integrations/logo-tiny-2.png";
-import logoRdStation from "@/assets/integrations/rd-station-cor-md.png";
-import logoShopify from "@/assets/integrations/shopify-logo.png";
-import logoTotvs from "@/assets/integrations/totvs-logo-1.png";
-
-const integrations = [
-  { name: "TOTVS", logo: logoTotvs },
-  { name: "RD Station", logo: logoRdStation },
-  { name: "Meta", logo: logoMeta },
-  { name: "Shopify", logo: logoShopify },
-  { name: "Vtex", logo: logoVtex },
-  { name: "Bling", logo: logoBling },
-  { name: "Tiny", logo: logoTiny },
-  { name: "Mercado Livre", logo: logoMercadoLivre },
-];
+import { integracoes, type Integracao } from "@/data/integracoes";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "./ui/dialog";
 
 const Integrations = () => {
+  const [selected, setSelected] = useState<Integracao | null>(null);
+
   return (
     <>
       <section id="integracoes" className="py-12 lg:py-16 bg-gradient-to-br from-[#009451]/15 to-[#22c55e]/15 relative overflow-hidden">
@@ -42,6 +27,9 @@ const Integrations = () => {
             </h2>
             <p className="mt-4 text-muted-foreground text-lg">
               Integrações nativas com o ecossistema RD Station, TOTVS e as principais plataformas de e-commerce.
+            </p>
+            <p className="mt-2 text-sm text-muted-foreground/70">
+              Clique em uma integração para ver o que ela faz na prática.
             </p>
           </motion.div>
 
@@ -68,17 +56,19 @@ const Integrations = () => {
               {/* Right — integrations grid */}
               <div className="md:w-2/3 p-8 md:p-10 w-full">
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4">
-                  {integrations.map((item) => (
-                    <div
-                      key={item.name}
-                      className="bg-background border border-border rounded-xl px-4 py-3 flex items-center justify-center hover:bg-muted transition-colors duration-200 aspect-video h-20 sm:h-24 group"
+                  {integracoes.map((item) => (
+                    <button
+                      key={item.slug}
+                      type="button"
+                      onClick={() => setSelected(item)}
+                      className="bg-background border border-border rounded-xl px-4 py-3 flex items-center justify-center hover:bg-muted hover:border-primary/30 transition-colors duration-200 aspect-video h-20 sm:h-24 group cursor-pointer"
                     >
                       <img
                         src={item.logo}
                         alt={item.name}
                         className="max-h-10 sm:max-h-12 w-auto max-w-full object-contain transition-all duration-300 group-hover:scale-110"
                       />
-                    </div>
+                    </button>
                   ))}
 
                   {/* "More" indicator */}
@@ -156,6 +146,43 @@ const Integrations = () => {
           </div>
         </div>
       </section>
+
+      {/* Pop-up de detalhe da integração — modelo TOTVS (funcionalidades nativas por integração) */}
+      <Dialog open={!!selected} onOpenChange={(open) => !open && setSelected(null)}>
+        <DialogContent className="sm:max-w-md">
+          {selected && (
+            <>
+              <div className="flex items-center gap-4">
+                <img
+                  src={selected.logo}
+                  alt={selected.name}
+                  className="w-14 h-14 object-contain shrink-0"
+                />
+                <div>
+                  <span className="text-xs font-semibold uppercase tracking-wide text-primary">
+                    {selected.categoria}
+                  </span>
+                  <DialogTitle className="text-xl leading-tight">{selected.name}</DialogTitle>
+                </div>
+              </div>
+              <DialogDescription className="text-[15px] leading-relaxed">
+                {selected.descricao}
+              </DialogDescription>
+
+              <ul className="space-y-3 mt-2">
+                {selected.funcionalidades.map((f) => (
+                  <li key={f} className="flex items-start gap-3 text-sm text-foreground/90">
+                    <span className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                      <Check className="w-3 h-3 text-primary" />
+                    </span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

@@ -1,6 +1,16 @@
+import { Link } from "react-router-dom";
 import zeepsLogo from "@/assets/zeeps-logo.png";
 import { Mail } from "lucide-react";
 import { motion } from "framer-motion";
+
+const quickLinks = [
+  { label: "Institucional", href: "/institucional" },
+  { label: "Funcionalidades", href: "/funcionalidades" },
+  { label: "Integrações", href: "/#integracoes" },
+  { label: "Planos", href: "/planos" },
+  { label: "Contato", href: "/contato" },
+  { label: "Documentação", href: "https://documentacao.zeeps.com.br/" },
+];
 
 const Footer = () => {
   return (
@@ -34,23 +44,32 @@ const Footer = () => {
           >
             <h4 className="font-semibold text-background text-sm mb-3">Links Rápidos</h4>
             <nav className="flex flex-col gap-2 items-center md:items-start">
-              {[
-                { label: "Funcionalidades", href: "/#funcionalidades" },
-                { label: "Integrações", href: "/#integracoes" },
-                { label: "Sobre", href: "/#sobre" },
-                { label: "Documentação", href: "https://documentacao.zeeps.com.br/" },
-                { label: "Contato", href: "/#contato" },
-              ].map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  target={l.href.startsWith("http") ? "_blank" : "_self"}
-                  rel={l.href.startsWith("http") ? "noopener noreferrer" : ""}
-                  className="text-sm text-background/60 hover:text-background transition-colors"
-                >
-                  {l.label}
-                </a>
-              ))}
+              {quickLinks.map((l) => {
+                const isExternal = l.href.startsWith("http");
+                const isAnchor = l.href.includes("#");
+                if (isExternal || isAnchor) {
+                  return (
+                    <a
+                      key={l.href}
+                      href={l.href}
+                      target={isExternal ? "_blank" : "_self"}
+                      rel={isExternal ? "noopener noreferrer" : ""}
+                      className="text-sm text-background/60 hover:text-background transition-colors"
+                    >
+                      {l.label}
+                    </a>
+                  );
+                }
+                return (
+                  <Link
+                    key={l.href}
+                    to={l.href}
+                    className="text-sm text-background/60 hover:text-background transition-colors"
+                  >
+                    {l.label}
+                  </Link>
+                );
+              })}
             </nav>
           </motion.div>
 
@@ -86,9 +105,9 @@ const Footer = () => {
           className="border-t border-background/10 mt-8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-background/40 text-center sm:text-left"
         >
           <p>© {new Date().getFullYear()} Zeeps. Todos os direitos reservados.</p>
-          <a href="/privacidade" className="hover:text-background transition-colors">
+          <Link to="/privacidade" className="hover:text-background transition-colors">
             Política de Privacidade
-          </a>
+          </Link>
         </motion.div>
       </div>
     </footer>
