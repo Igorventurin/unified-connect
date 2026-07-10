@@ -62,37 +62,6 @@ const ProductShowcase = () => {
           </p>
         </motion.div>
 
-        {/* Tab Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-3 mb-10"
-        >
-          {slides.map((s, i) => (
-            <button
-              key={s.title}
-              onClick={() => setActive(i)}
-              className={`relative px-5 py-2 rounded-full text-sm font-medium border transition-all duration-300 overflow-hidden ${active === i
-                ? "gradient-primary text-white border-transparent shadow-md"
-                : "bg-white text-muted-foreground border-border hover:border-[#009245] hover:text-[#009245]"
-                }`}
-            >
-              {s.title}
-              {active === i && (
-                <motion.span
-                  key={`progress-${i}`}
-                  className="absolute bottom-0 left-0 h-[3px] bg-white/40"
-                  initial={{ width: "0%" }}
-                  animate={{ width: "100%" }}
-                  transition={{ duration: INTERVAL / 1000, ease: "linear" }}
-                />
-              )}
-            </button>
-          ))}
-        </motion.div>
-
         {/* Two-column layout */}
         <div className="max-w-6xl mx-auto grid lg:grid-cols-[2fr_3fr] gap-10 items-center">
           {/* Left: Accordion topics */}

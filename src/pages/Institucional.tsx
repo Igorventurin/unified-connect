@@ -19,6 +19,7 @@ import {
   Rocket,
 } from "lucide-react";
 import Layout from "@/components/Layout";
+import Seo from "@/components/Seo";
 
 // TODO: foto placeholder (Unsplash) — trocar por uma foto real do time/escritório da Zeeps.
 const teamPhoto =
@@ -184,6 +185,11 @@ const Institucional = () => {
 
   return (
     <Layout>
+      <Seo
+        title="Institucional"
+        description="Conheça a história da Zeeps: de um problema interno a uma plataforma completa de automação de atendimento, com foco em transparência, inovação e simplicidade."
+        path="/institucional"
+      />
       {/* Hero / Sobre a Zeeps */}
       <section className="relative py-16 lg:py-20 bg-gradient-to-b from-primary/5 to-transparent overflow-hidden">
         <div className="container mx-auto px-4 lg:px-8 max-w-3xl text-center relative z-10">

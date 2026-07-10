@@ -8,6 +8,7 @@ const quickLinks = [
   { label: "Funcionalidades", href: "/funcionalidades" },
   { label: "Integrações", href: "/#integracoes" },
   { label: "Planos", href: "/planos" },
+  { label: "Blog", href: "/blog" },
   { label: "Contato", href: "/contato" },
   { label: "Documentação", href: "https://documentacao.zeeps.com.br/" },
 ];

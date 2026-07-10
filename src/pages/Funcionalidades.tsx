@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Bot, Users, Plug, BarChart3, Workflow, ShieldCheck, Check, PlayCircle } from "lucide-react";
 import Layout from "@/components/Layout";
+import Seo from "@/components/Seo";
 import FAQ from "@/components/FAQ";
 import HowItWorksModal, { type FeatureBlock } from "@/components/HowItWorksModal";
 import {
@@ -121,6 +122,11 @@ const Funcionalidades = () => {
 
   return (
     <Layout>
+      <Seo
+        title="Funcionalidades"
+        description="Agentes de IA, multi-atendentes, integrações nativas, analytics, automação e segurança — conheça em detalhe todas as ferramentas da plataforma Zeeps."
+        path="/funcionalidades"
+      />
       {/* Page Hero */}
       <section className="py-16 lg:py-20 bg-gradient-to-b from-primary/5 to-transparent">
         <div className="container mx-auto px-4 lg:px-8 max-w-3xl text-center">

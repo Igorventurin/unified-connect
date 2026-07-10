@@ -7,6 +7,7 @@ import ferramentaVideo from "@/assets/ferramenta.mp4";
 import configZeeps from "@/assets/configurações_zeeps.png";
 import { integracoes, type Integracao } from "@/data/integracoes";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "./ui/dialog";
+import { Tooltip, TooltipTrigger, TooltipContent } from "./ui/tooltip";
 
 const Integrations = () => {
   const [selected, setSelected] = useState<Integracao | null>(null);
@@ -61,8 +62,16 @@ const Integrations = () => {
                       key={item.slug}
                       type="button"
                       onClick={() => setSelected(item)}
-                      className="bg-background border border-border rounded-xl px-4 py-3 flex items-center justify-center hover:bg-muted hover:border-primary/30 transition-colors duration-200 aspect-video h-20 sm:h-24 group cursor-pointer"
+                      className="relative bg-background border border-border rounded-xl px-4 py-3 flex items-center justify-center hover:bg-muted hover:border-primary/30 transition-colors duration-200 aspect-video h-20 sm:h-24 group cursor-pointer"
                     >
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <span className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-primary/10 text-muted-foreground/60 flex items-center justify-center text-[10px] font-semibold z-10 group-hover:bg-primary/15 group-hover:text-primary/70 transition-colors">
+                            ?
+                          </span>
+                        </TooltipTrigger>
+                        <TooltipContent>Clique para saber mais</TooltipContent>
+                      </Tooltip>
                       <img
                         src={item.logo}
                         alt={item.name}

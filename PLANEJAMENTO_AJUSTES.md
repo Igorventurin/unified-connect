@@ -236,6 +236,12 @@ Sequência pensada por **dependência técnica** (fundação primeiro) e **impac
 **Objetivo:** página de captura dedicada.
 **Ações:** Page Hero de acolhimento · **Formulário de Captura** (reaproveitar lógica do `ContactForm.tsx` — webhook n8n + WhatsApp) · Footer.
 **Arquivos:** `src/pages/Contato.tsx`, reaproveitar `ContactForm.tsx`.
+**Status:** ✅ **Concluído**
+- `src/pages/Contato.tsx` (reescrito): Page Hero de acolhimento ("Vamos conversar sobre o seu atendimento") com 3 pontos de confiança (Conversa sem compromisso, Resposta rápida, Sem letras miúdas) → `<ContactForm />` reaproveitado sem alterações (mesmo webhook n8n + redirecionamento pro WhatsApp) → Footer via `Layout`.
+- `ContactForm.tsx` continua também na Home (seção `#contato`) — mesmo padrão de "teaser na Home + página dedicada" já usado em Funcionalidades e Planos.
+- Testado no preview: hero, formulário e footer renderizam corretamente, sem erros no console.
+
+**Retoque pós-entrega (a pedido do cliente):** removida a imagem de fundo (`contato.png`) atrás do `ContactForm` — trocada por um gradiente branco/verde com blobs suaves e duas ondas SVG animadas (drift horizontal em loop) na base da seção. Como o componente é compartilhado, o efeito vale tanto para `/contato` quanto para a seção de contato da Home.
 
 ---
 
@@ -248,6 +254,14 @@ Sequência pensada por **dependência técnica** (fundação primeiro) e **impac
 4. Limpeza de componentes órfãos e **SEO por página** (title/description/OG por rota).
 **Arquivos:** `Testimonials.tsx`, `WhatsAppButton.tsx`/novo mascote, `index.html` + meta por rota, remoção de código morto.
 **Preciso de você:** depoimentos reais (texto, nome, cargo, foto/logo) e imagens humanizadas.
+**Status:** 🟡 **Parcialmente concluído** — itens 1 e 4 feitos; itens 2 e 3 bloqueados por falta de material.
+1. **Robô-mascote** ✅ — `src/components/SupportMascot.tsx` (novo): pop-up amigável ("Precisa de ajuda? 👋") com avatar do robô, que aparece perto do botão de WhatsApp após alguns segundos (uma vez por sessão, via `sessionStorage`) e leva pro WhatsApp ao clicar. Botão de WhatsApp (`WhatsAppButton.tsx`) mantido como estava — o mascote é um elemento adicional, não substitui o CTA já validado.
+2. **Depoimentos reais** ⏳ **bloqueado** — `Testimonials.tsx` continua com os 9 depoimentos fictícios (nomes e fotos de banco de imagens), agora marcados com `TODO` explícito no código. Preciso que você me passe os depoimentos reais (texto, nome, cargo, foto) pra trocar.
+3. **Humanização geral** ⏳ **bloqueado** — não avancei nessa frente por não ter fotos reais de pessoas/equipe além da já usada no Institucional; aguardando material.
+4. **Limpeza de código morto + SEO por página** ✅
+   - Removido `src/components/ui/splite.tsx` (wrapper do robô 3D Spline, órfão desde que o Hero mudou) e desinstaladas as dependências `@splinetool/react-spline` e `@splinetool/runtime` do `package.json`.
+   - `src/components/Seo.tsx` (novo): componente leve que ajusta `document.title`, `description`, `og:*`, `twitter:*`, `canonical` e `robots` por rota via `useEffect` (sem precisar de lib como react-helmet). Adicionado em todas as páginas: Home, Institucional, Funcionalidades, Planos, Contato, Blog, Segmento (dinâmico por slug), Privacidade, Obrigado e 404 (as duas últimas com `noindex`).
+   - Testado no preview: título da aba e meta tags mudam corretamente por rota, tanto em navegação cheia quanto client-side; mascote aparece, fecha e não reaparece na mesma sessão; sem erros no console.
 
 ---
 
@@ -261,8 +275,15 @@ Sequência pensada por **dependência técnica** (fundação primeiro) e **impac
 **Arquivos:** `src/pages/Blog.tsx`, `src/pages/BlogPost.tsx`, `src/lib/wordpress.ts` (funções de consumo da API), `App.tsx` (novas rotas), `Header.tsx`/`Footer.tsx` (link).
 **Preciso de você:** URL base do WordPress (ex.: `https://blog.zeeps.com.br`) usado como fonte da API.
 **Entrega:** página de blog listando os posts reais do WordPress, com página de leitura individual.
+**Status:** ✅ **Concluído** (front-end pronto — falta o WordPress ir ao ar)
+- `src/lib/wordpress.ts` (novo): funções `fetchPosts` (listagem, paginada, com `_embed=true` pra trazer a imagem de capa numa única chamada) e `fetchPostBySlug` (post individual), consumindo `https://blog.zeeps.com.br/wp-json/wp/v2/posts` — URL definida por você, ainda não publicada.
+- `src/pages/Blog.tsx` (reescrito): Page Hero → grid de cards (capa, data, título, resumo, "Ler mais →") → estados de **loading** (skeleton), **vazio** ("nenhum post publicado ainda") e **erro** (mensagem amigável avisando que o blog ainda não está no ar, sem quebrar a página).
+- `src/pages/BlogPost.tsx` (novo): página de post individual — título, data, imagem de capa e conteúdo renderizado via `dangerouslySetInnerHTML` (conteúdo vem do WordPress do próprio cliente, fonte confiável), estilizado com `@tailwindcss/typography` (o plugin já estava instalado no projeto mas faltava registrar no `tailwind.config.ts` — corrigido). Mesmos estados de loading/erro/não encontrado da listagem.
+- Rota `/blog/:slug` adicionada no `App.tsx`. Link **Blog** já existia no Header (dropdown "Empresa") e foi adicionado também no Footer (Links Rápidos).
+- SEO por post via `<Seo />` (reaproveitando o componente do Ajuste 10), usando título/resumo do próprio WordPress; páginas de erro/não encontrado marcadas `noindex`.
+- ⚠️ **O WordPress ainda não está publicado** em `blog.zeeps.com.br` — testado no preview e confirmado que, enquanto isso, a página mostra o aviso "O blog ainda não está no ar" de forma elegante (sem tela em branco ou erro feio), tanto na listagem quanto no post individual. Assim que o WordPress subir, os posts aparecem automaticamente, sem precisar mexer no código.
 
-> Combinado: este é o **último ajuste** da fila, executado só depois dos Ajustes 1 a 10.
+> Combinado: este era o **último ajuste numerado** da fila (1 a 11) — falta retomar o **Ajuste 4** (Segmentação), combinado para ser feito por último.
 
 ---
 
@@ -280,7 +301,7 @@ Nada disso trava o início — uso **placeholders** e você substitui depois. Ma
 - [ ] **GIFs/vídeos** curtos das telas (Ajuste 7)
 - [x] **Tabela de preços** e matriz de recursos por plano (Ajuste 8) — ✅ **resolvido** via `Planos.jpg` + PDF (Básico, Intermediário, Business — setup, mensalidade e recursos por plano)
 - [ ] **Depoimentos reais** — texto, nome, cargo, foto/logo (Ajuste 10)
-- [ ] **URL base do WordPress** usado como fonte da API do Blog (Ajuste 11)
+- [x] **URL base do WordPress** (Ajuste 11) — ✅ **resolvido**: `blog.zeeps.com.br` (ainda não publicado pelo cliente, mas já integrado no código; posts aparecem automaticamente assim que o WordPress subir)
 
 > Observação do próprio documento: vídeos e prints da plataforma são de responsabilidade do cliente fornecer, ou cotar produção com a equipe Catalisa.
 

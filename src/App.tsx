@@ -13,6 +13,7 @@ import Funcionalidades from "./pages/Funcionalidades";
 import Planos from "./pages/Planos";
 import Contato from "./pages/Contato";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/planos" element={<Planos />} />
           <Route path="/contato" element={<Contato />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/privacidade" element={<Privacy />} />
           <Route path="/obrigado" element={<ThankYou />} />
           <Route path="*" element={<NotFound />} />

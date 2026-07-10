@@ -4,37 +4,43 @@ import { Users, Bot, GitBranch, Code2, Clock, BarChart3 } from "lucide-react";
 const features = [
   {
     icon: Bot,
-    title: "Agentes de IA que vendem",
+    label: "Agentes de IA",
+    lead: "Agentes de IA que vendem",
     desc: "Sua IA entende o cliente, qualifica o interesse e conduz o primeiro contato sozinha, 24 horas por dia.",
     color: "from-green-500/20 to-emerald-500/0",
   },
   {
     icon: Users,
-    title: "Sua equipe inteira, um único WhatsApp",
+    label: "Multi-atendentes",
+    lead: "Sua equipe inteira, um único WhatsApp",
     desc: "Acabe com a bagunça de vários números: todos os atendentes trabalham juntos, com histórico compartilhado.",
     color: "from-emerald-500/20 to-teal-500/0",
   },
   {
     icon: GitBranch,
-    title: "O cliente certo, no setor certo",
+    label: "Roteamento Inteligente",
+    lead: "O cliente certo, no setor certo",
     desc: "Encaminhamento automático para o departamento certo, sem intervenção manual e sem cliente perdido no meio do caminho.",
     color: "from-teal-500/20 to-cyan-500/0",
   },
   {
     icon: BarChart3,
-    title: "Decisões com dados, não com achismo",
+    label: "Analytics",
+    lead: "Decisões com dados, não com achismo",
     desc: "Acompanhe a performance da equipe em tempo real e tome decisões melhores com métricas de verdade.",
     color: "from-teal-500/20 to-emerald-500/0",
   },
   {
     icon: Clock,
-    title: "Follow-up que nunca esquece",
+    label: "Follow-up Automático",
+    lead: "Follow-up que nunca esquece",
     desc: "Agende lembretes e retornos automáticos e nunca mais perca uma oportunidade por falha humana.",
     color: "from-emerald-500/20 to-green-500/0",
   },
   {
     icon: Code2,
-    title: "Sua operação, do seu jeito",
+    label: "API Aberta",
+    lead: "Sua operação, do seu jeito",
     desc: "Conecte a Zeeps a qualquer sistema com uma API aberta e flexível, sem depender só de integrações prontas.",
     color: "from-cyan-500/20 to-blue-500/0",
   },
@@ -84,15 +90,17 @@ const Features = () => {
               <div className={`absolute inset-0 bg-gradient-to-br ${f.color} opacity-100 pointer-events-none`} />
 
               <div className="relative z-10 flex flex-col h-full">
-                <div className="w-14 h-14 rounded-2xl bg-white dark:bg-zinc-800 border border-border/50 flex items-center justify-center shrink-0 mb-6 shadow-sm group-hover:bg-primary group-hover:border-primary transition-colors duration-300">
-                  <f.icon className="w-6 h-6 text-zinc-600 dark:text-zinc-300 group-hover:text-white transition-colors duration-300" />
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-12 h-12 rounded-2xl bg-white dark:bg-zinc-800 border border-border/50 flex items-center justify-center shrink-0 shadow-sm group-hover:bg-primary group-hover:border-primary transition-colors duration-300">
+                    <f.icon className="w-5 h-5 text-zinc-600 dark:text-zinc-300 group-hover:text-white transition-colors duration-300" />
+                  </div>
+                  <h3 className="font-bold text-foreground text-lg leading-tight">
+                    {f.label}
+                  </h3>
                 </div>
-
-                <h3 className="font-bold text-foreground text-xl leading-tight mb-3">
-                  {f.title}
-                </h3>
-                <p className="text-muted-foreground text-[15px] leading-relaxed flex-1">
-                  {f.desc}
+                <p className="text-[15px] leading-relaxed flex-1">
+                  <span className="font-semibold text-foreground/90">{f.lead}: </span>
+                  <span className="text-muted-foreground">{f.desc}</span>
                 </p>
               </div>
             </motion.div>

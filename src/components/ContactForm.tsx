@@ -1,7 +1,6 @@
 import { useState, FormEvent } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import contatoBg from "@/assets/contato.png";
 
 const ContactForm = () => {
   const navigate = useNavigate();
@@ -48,16 +47,92 @@ const ContactForm = () => {
   return (
     <section
       id="contato"
-      className="py-16 lg:py-24 relative overflow-hidden"
-      style={{
-        backgroundImage: `url(${contatoBg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
+      className="py-16 lg:py-24 relative overflow-hidden bg-gradient-to-br from-white via-primary/5 to-secondary/10"
     >
-      {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" />
+      {/* Blobs decorativos */}
+      <div className="absolute top-0 -left-24 w-[420px] h-[420px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 -right-24 w-[420px] h-[420px] bg-secondary/10 rounded-full blur-[100px] pointer-events-none" />
+
+      {/* Ondas animadas — camadas em gradiente preenchendo ~80% da altura da seção */}
+      <div className="absolute inset-x-0 bottom-0 h-[80%] overflow-hidden pointer-events-none">
+        <svg width="0" height="0" className="absolute">
+          <defs>
+            <linearGradient id="wave-grad-1" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.06" />
+              <stop offset="100%" stopColor="hsl(var(--secondary))" stopOpacity="0.1" />
+            </linearGradient>
+            <linearGradient id="wave-grad-2" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="hsl(var(--secondary))" stopOpacity="0.08" />
+              <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.14" />
+            </linearGradient>
+            <linearGradient id="wave-grad-3" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
+              <stop offset="100%" stopColor="hsl(var(--secondary))" stopOpacity="0.18" />
+            </linearGradient>
+            <linearGradient id="wave-grad-4" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="hsl(var(--secondary))" stopOpacity="0.12" />
+              <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.22" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <motion.svg
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          className="absolute left-0 w-[200%]"
+          style={{ top: 0, height: "45%" }}
+          animate={{ x: [0, -720] }}
+          transition={{ duration: 26, repeat: Infinity, ease: "linear" }}
+        >
+          <path
+            d="M0,64 C240,120 480,0 720,32 C960,64 1200,120 1440,64 L1440,120 L0,120 Z M1440,64 C1680,120 1920,0 2160,32 C2400,64 2640,120 2880,64 L2880,120 L1440,120 Z"
+            fill="url(#wave-grad-1)"
+          />
+        </motion.svg>
+
+        <motion.svg
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          className="absolute left-0 w-[200%]"
+          style={{ top: "18%", height: "50%" }}
+          animate={{ x: [-720, 0] }}
+          transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+        >
+          <path
+            d="M0,80 C240,32 480,120 720,80 C960,40 1200,96 1440,72 L1440,120 L0,120 Z M1440,72 C1680,96 1920,40 2160,80 C2400,120 2640,32 2880,80 L2880,120 L1440,120 Z"
+            fill="url(#wave-grad-2)"
+          />
+        </motion.svg>
+
+        <motion.svg
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          className="absolute left-0 w-[200%]"
+          style={{ top: "38%", height: "62%" }}
+          animate={{ x: [0, -960] }}
+          transition={{ duration: 19, repeat: Infinity, ease: "linear" }}
+        >
+          <path
+            d="M0,48 C200,96 500,16 760,56 C1020,96 1240,32 1440,56 L1440,120 L0,120 Z M1440,56 C1640,32 1940,96 2200,56 C2460,16 2760,96 2880,56 L2880,120 L1440,120 Z"
+            fill="url(#wave-grad-3)"
+          />
+        </motion.svg>
+
+        <motion.svg
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          className="absolute left-0 w-[200%]"
+          style={{ bottom: 0, height: "40%" }}
+          animate={{ x: [-960, 0] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+        >
+          <path
+            d="M0,72 C260,32 520,112 780,64 C1040,16 1300,88 1440,48 L1440,120 L0,120 Z M1440,48 C1580,88 1840,16 2100,64 C2360,112 2620,32 2880,72 L2880,120 L1440,120 Z"
+            fill="url(#wave-grad-4)"
+          />
+        </motion.svg>
+      </div>
+
       <div className="container mx-auto px-4 lg:px-8 max-w-xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}

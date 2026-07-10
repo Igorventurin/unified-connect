@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Check, Minus, ChevronDown, ExternalLink } from "lucide-react";
 import Layout from "@/components/Layout";
+import Seo from "@/components/Seo";
 
 // Preços, limites e recursos abaixo são os valores reais fornecidos pelo
 // cliente (Planos.jpg / "SITE - integrações e planos.pdf") — ver Ajuste 8 no
@@ -143,6 +144,11 @@ const Planos = () => {
 
   return (
     <Layout>
+      <Seo
+        title="Planos e Preços"
+        description="Conheça os planos Básico, Intermediário e Business da Zeeps: setup, mensalidade e recursos detalhados para escolher o ideal para o tamanho da sua operação."
+        path="/planos"
+      />
       {/* Page Hero Comercial */}
       <section className="py-16 lg:py-20 bg-gradient-to-b from-primary/5 to-transparent">
         <div className="container mx-auto px-4 lg:px-8 max-w-3xl text-center">

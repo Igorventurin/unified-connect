@@ -8,6 +8,9 @@ interface Testimonial {
   role: string;
 }
 
+// TODO: depoimentos e fotos abaixo são placeholder/fictícios — pendente dos
+// depoimentos reais de clientes (texto, nome, cargo, foto) para substituir
+// (ver Ajuste 10 no PLANEJAMENTO_AJUSTES.md).
 const testimonials: Testimonial[] = [
   {
     text: "A Zeeps revolucionou nossas operações, simplificando finanças e atendimento. A plataforma nos mantém produtivos, mesmo remotamente.",
