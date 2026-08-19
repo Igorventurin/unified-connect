@@ -25,6 +25,8 @@ const navItems: NavItem[] = [
   { type: "link", label: "Contato", href: "/contato" },
 ];
 
+const SUPPORT_URL = "https://suporte.zeeps.com.br/index.php?noAUTO=1";
+
 const isAnchor = (href: string) => href.includes("#");
 
 // Navega via React Router para rotas internas; usa <a> comum para âncoras (ex: /#segmentos).
@@ -138,20 +140,15 @@ const Header = () => {
 
         {/* Right side: Suporte + Socials + CTA */}
         <div className="hidden md:flex items-center gap-6 shrink-0">
-          {/*
-            TODO: URL do Suporte (GLPI) pendente — o cliente ainda vai fornecer.
-            Por ora o botão fica visível (bem destacado, antes das redes sociais,
-            conforme diretriz), mas sem destino. Assim que a URL chegar, trocar
-            este <button> por um <a href={SUPPORT_URL} target="_blank"> normal.
-          */}
-          <button
-            type="button"
-            title="Link de suporte pendente de configuração"
-            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-sm font-semibold text-foreground/80 hover:text-foreground hover:border-primary/40 transition-colors cursor-default"
+          <a
+            href={SUPPORT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-sm font-semibold text-foreground/80 hover:text-foreground hover:border-primary/40 transition-colors"
           >
             <LifeBuoy className="w-4 h-4" />
             Suporte
-          </button>
+          </a>
 
           <div className="flex items-center gap-4">
             <a href="https://www.facebook.com/profile.php?id=100084110093569" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
@@ -248,15 +245,15 @@ const Header = () => {
             );
           })}
 
-          {/* Suporte (GLPI) — mesmo estado pendente do desktop, ver TODO acima */}
-          <button
-            type="button"
-            title="Link de suporte pendente de configuração"
-            className="flex items-center gap-2 py-3 text-base font-medium text-muted-foreground cursor-default"
+          <a
+            href={SUPPORT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 py-3 text-base font-medium text-muted-foreground hover:text-foreground"
           >
             <LifeBuoy className="w-4 h-4" />
             Suporte
-          </button>
+          </a>
 
           <Link
             to="/contato"

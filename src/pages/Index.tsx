@@ -26,8 +26,8 @@ const Index = () => {
       <main>
         <HeroSection />
         <LogoCarousel />
-        <SocialProof />
         <ProductShowcase />
+        <SocialProof />
         <Features />
         <PlanosPreview />
         <Integrations />

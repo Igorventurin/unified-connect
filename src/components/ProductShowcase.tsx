@@ -3,31 +3,44 @@ import { motion, AnimatePresence } from "framer-motion";
 import dashboardImagem from "@/assets/dashboard_imagem.png";
 import { VideoPlayer } from "./ui/video-player";
 import conhecaVideo from "@/assets/conheça.mp4";
+import showcaseAgentesIA from "@/assets/showcase_agentes_ia.jpg";
+import showcaseMultiAtendentes from "@/assets/showcase_multi_atendentes.jpg";
+import showcaseRoteamento from "@/assets/showcase_roteamento.jpg";
+import showcaseAnalytics from "@/assets/showcase_analytics.jpg";
+import showcaseFollowup from "@/assets/showcase_followup.jpg";
+import showcaseIntegracoes from "@/assets/showcase_integracoes.jpg";
+import elementsGreenTopLeft from "@/assets/elements_green_top_left.png";
 
 const slides = [
   {
     title: "Agentes de IA que vendem",
     desc: "Sua IA entende o cliente, qualifica o interesse e conduz o primeiro contato sozinha, 24 horas por dia.",
+    image: showcaseAgentesIA,
   },
   {
     title: "Sua equipe inteira, um único WhatsApp",
     desc: "Acabe com a bagunça de vários números: todos os atendentes trabalham juntos, com histórico compartilhado.",
+    image: showcaseMultiAtendentes,
   },
   {
     title: "O cliente certo, no setor certo",
     desc: "Encaminhamento automático para o departamento certo, sem intervenção manual e sem cliente perdido no meio do caminho.",
+    image: showcaseRoteamento,
   },
   {
     title: "Decisões com dados, não com achismo",
     desc: "Acompanhe a performance da equipe em tempo real e tome decisões melhores com métricas de verdade.",
+    image: showcaseAnalytics,
   },
   {
     title: "Follow-up que nunca esquece",
     desc: "Agende lembretes e retornos automáticos e nunca mais perca uma oportunidade por falha humana.",
+    image: showcaseFollowup,
   },
   {
     title: "Sua operação, do seu jeito",
     desc: "Conecte a Zeeps a qualquer sistema com uma API aberta e flexível, sem depender só de integrações prontas.",
+    image: showcaseIntegracoes,
   },
 ];
 
@@ -44,8 +57,14 @@ const ProductShowcase = () => {
   }, []);
 
   return (
-    <section id="produto" className="py-12 lg:py-20 bg-[#fafafa] overflow-hidden">
-      <div className="container mx-auto px-4 lg:px-8">
+    <section id="produto" className="relative py-12 lg:py-20 bg-[#fafafa] overflow-hidden">
+      <img
+        src={elementsGreenTopLeft}
+        alt=""
+        aria-hidden="true"
+        className="absolute top-0 left-0 w-32 sm:w-40 lg:w-48 pointer-events-none select-none z-0"
+      />
+      <div className="container mx-auto px-4 lg:px-8 relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -123,20 +142,27 @@ const ProductShowcase = () => {
             })}
           </div>
 
-          {/* Right: Dashboard image */}
+          {/* Right: imagem do tópico ativo, com crossfade ao trocar */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="overflow-hidden rounded-2xl border border-border shadow-soft bg-white p-2"
+            className="relative overflow-hidden rounded-2xl border border-border shadow-soft bg-white p-2 aspect-[4/3]"
           >
-            <img
-              src={dashboardImagem}
-              alt="Dashboard Zeeps"
-              className="w-full h-auto rounded-xl"
-              loading="lazy"
-            />
+            <AnimatePresence>
+              <motion.img
+                key={slides[active].title}
+                src={slides[active].image}
+                alt={slides[active].title}
+                initial={{ opacity: 0, scale: 1.04 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.97 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                className="absolute inset-2 w-[calc(100%-1rem)] h-[calc(100%-1rem)] object-cover rounded-xl"
+                loading="lazy"
+              />
+            </AnimatePresence>
           </motion.div>
         </div>
 

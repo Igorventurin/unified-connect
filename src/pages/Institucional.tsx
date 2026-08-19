@@ -9,10 +9,10 @@ import {
   type MotionValue,
 } from "framer-motion";
 import {
-  Calendar,
-  Users,
-  MapPin,
-  Building2,
+  MessageSquare,
+  Headset,
+  BadgeCheck,
+  Globe,
   ShieldCheck,
   Lightbulb,
   HeartHandshake,
@@ -20,18 +20,28 @@ import {
 } from "lucide-react";
 import Layout from "@/components/Layout";
 import Seo from "@/components/Seo";
+import institucionalHero from "@/assets/institucional_hero.png";
 
 // TODO: foto placeholder (Unsplash) — trocar por uma foto real do time/escritório da Zeeps.
 const teamPhoto =
   "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=900&h=1200";
 
-// TODO: números institucionais abaixo são placeholder/inventados — pendente
-// dos valores reais do cliente (ver Ajuste 6 no PLANEJAMENTO_AJUSTES.md).
+// Números reais fornecidos pelo cliente (ver Ajuste 6 no PLANEJAMENTO_AJUSTES.md).
 const numeros = [
-  { icon: Calendar, value: "2018", label: "Ano de fundação" },
-  { icon: Users, value: "45+", label: "Colaboradores" },
-  { icon: MapPin, value: "12", label: "Estados atendidos" },
-  { icon: Building2, value: "2", label: "Escritórios" },
+  { icon: MessageSquare, value: "+22 mil", label: "mensagens processadas" },
+  { icon: Headset, value: "+6,5 mil", label: "atendimentos" },
+];
+
+// Frases institucionais de apoio, fornecidas junto dos números acima.
+const conquistas = [
+  {
+    icon: BadgeCheck,
+    text: "Somos parceiros oficiais Meta® e o nosso foco é a segurança e a escalabilidade do seu negócio.",
+  },
+  {
+    icon: Globe,
+    text: "Atuamos em todo o país e em todos os segmentos, da indústria ao varejo, da saúde ao agronegócio.",
+  },
 ];
 
 const pilares = [
@@ -192,28 +202,45 @@ const Institucional = () => {
       />
       {/* Hero / Sobre a Zeeps */}
       <section className="relative py-16 lg:py-20 bg-gradient-to-b from-primary/5 to-transparent overflow-hidden">
-        <div className="container mx-auto px-4 lg:px-8 max-w-3xl text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="inline-block text-sm font-semibold uppercase tracking-widest text-primary mb-4">
-              Institucional
-            </span>
-            <h1 className="text-3xl lg:text-5xl font-bold text-foreground leading-tight">
-              De um problema interno a uma{" "}
-              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                plataforma completa
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
+          <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="flex-1 text-center lg:text-left"
+            >
+              <span className="inline-block text-sm font-semibold uppercase tracking-widest text-primary mb-4">
+                Institucional
               </span>
-            </h1>
-            <p className="mt-6 text-muted-foreground text-lg leading-relaxed">
-              Nascemos com a paixão por simplificar a comunicação empresarial. Nossa missão é
-              ser a referência definitiva em integração de atendimento, conectando equipes,
-              clientes e sistemas em uma experiência transparente e inovadora.
-            </p>
-          </motion.div>
+              <h1 className="text-3xl lg:text-5xl font-bold text-foreground leading-tight">
+                De um problema interno a uma{" "}
+                <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                  plataforma completa
+                </span>
+              </h1>
+              <p className="mt-6 text-muted-foreground text-lg leading-relaxed">
+                Nascemos com a paixão por simplificar a comunicação empresarial. Nossa missão é
+                ser a referência definitiva em integração de atendimento, conectando equipes,
+                clientes e sistemas em uma experiência transparente e inovadora.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="flex-1 w-full max-w-sm lg:max-w-none flex justify-center"
+            >
+              <img
+                src={institucionalHero}
+                alt="Confiança e parceria Zeeps"
+                className="w-full max-w-sm h-auto"
+              />
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -234,7 +261,7 @@ const Institucional = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6 max-w-5xl mx-auto"
+            className="grid grid-cols-2 gap-8 lg:gap-6 max-w-2xl mx-auto"
           >
             {numeros.map((s, i) => (
               <motion.div
@@ -254,6 +281,23 @@ const Institucional = () => {
                 />
                 <p className="mt-1 text-sm text-muted-foreground">{s.label}</p>
               </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto mt-10"
+          >
+            {conquistas.map((c) => (
+              <div key={c.text} className="flex items-start gap-3 bg-white rounded-2xl shadow-card px-5 py-4">
+                <span className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                  <c.icon className="w-5 h-5 text-primary" />
+                </span>
+                <p className="text-sm text-muted-foreground leading-relaxed">{c.text}</p>
+              </div>
             ))}
           </motion.div>
         </div>

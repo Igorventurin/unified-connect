@@ -96,6 +96,8 @@ Sequência pensada por **dependência técnica** (fundação primeiro) e **impac
 - **Menu reorganizado em dropdown** para não sobrecarregar a nav: agrupamos **Institucional + Blog** sob um item **"Empresa ▾"**. Menu final: `Home · Segmentos · Funcionalidades · Planos · Empresa ▾ · Contato`. No desktop abre no hover (com animação), no mobile funciona como acordeão dentro do menu.
 - Testado no preview: navegação desktop, rota dinâmica `/segmentos/:slug`, dropdown "Empresa" (hover + clique nos itens), acordeão mobile, menu mobile completo e botão Suporte (confirmado sem destino).
 
+**Retoque pós-entrega (URL recebida):** botão Suporte trocado de `<button>` (sem destino) para `<a href="https://suporte.zeeps.com.br/index.php?noAUTO=1" target="_blank">`, no desktop e no mobile.
+
 ---
 
 ### 🔧 Ajuste 2 — Home: nova Hero (sem robô) + Prova Social legível
@@ -115,9 +117,10 @@ Sequência pensada por **dependência técnica** (fundação primeiro) e **impac
   - *Bug técnico corrigido durante a implementação:* a imagem de fundo não aparecia por um problema clássico de *stacking context* (`z-index: -10` sem a seção pai ter um `z-index` explícito escapava para trás do fundo branco da página) — corrigido adicionando `z-0` na seção.
 - **Carrossel de logos virou sua própria mini seção** (`LogoCarousel.tsx`, novo componente), separado da Hero — fundo branco com borda superior/inferior sutil (`bg-white border-y border-border`), criando um respiro visual entre a Hero (foto) e a Seção de Confiança (fundo esverdeado claro) logo abaixo. Logos maiores (h-10, containers h-16) e **sem o efeito cinza→cor** — sempre coloridos e legíveis, inclusive no mobile.
 - `SocialProof.tsx` reescrito como a nova **Seção de Confiança**: 4 métricas (empresas atendidas, satisfação, conformidade LGPD, volume de mensagens processadas), com ícones e números em destaque. Estava importado no `Index.tsx` mas nunca renderizado — corrigido e adicionado após o carrossel de logos.
-- ⚠️ **Números da Seção de Confiança são placeholder/inventados** (500+, 98%, 100%, 10M+) — marcados com comentário `TODO` no código (`SocialProof.tsx`) e pendentes de troca pelos valores reais.
 - Também corrigido um bug pré-existente nos CTAs da Hero (`href="#contato"` e `href="#produto"` sem barra inicial, que quebrariam a navegação vindo de outra página) → agora `/#contato` e `/#produto`.
 - Testado no preview: desktop (800px e 1440px) e mobile, sem erros no console.
+
+**Retoque pós-entrega (dados reais do cliente):** `SocialProof.tsx` foi reescrito novamente, trocando as 4 métricas agregadas inventadas por **3 cases de sucesso reais** — Fokus, Grupo Pérola e Milhão Ingredients — cada card com logo, headline, estatística/destaque e os campos Resultado (ou Funcionalidades, no caso da Milhão) e Diferencial. ⚠️ O campo "Impacto" citado no material do cliente não veio com texto próprio para nenhum dos 3 casos, então os cards mostram só 2 campos — se houver um texto específico para "Impacto", é só enviar que eu adiciono.
 
 ---
 
@@ -134,6 +137,11 @@ Sequência pensada por **dependência técnica** (fundação primeiro) e **impac
 - `Features.tsx`: 6 cards reescritos com linguagem de benefício, ícones mantidos, cores de gradiente em padrão.
 - `ProductShowcase.tsx`: Reescrito para 6 tópicos dinâmicos, menu de botões no topo (com wrap em mobile), accordion à esquerda com descrições que expandem, imagem placeholder à direita, auto-rotation a cada 6 segundos (manual ao clicar também). Video "Conheça a Zeeps" com glow embaixo.
 - Layout testado em desktop (1440px) — botões em 2 linhas (3 em cima, 3 embaixo), accordion bem legível, imagem e vídeo responsivos.
+
+**Retoques pós-entrega:**
+- Os botões/pills do topo foram removidos a pedido do cliente — os tópicos continuam trocando normalmente (clique ou auto-rotação) só pelo accordion à esquerda.
+- **Prints reais recebidos**: `dashboard_imagem.png` (placeholder único) foi trocado por **6 screenshots reais da plataforma**, um por tópico (`showcase_agentes_ia.jpg`, `showcase_multi_atendentes.jpg`, `showcase_roteamento.jpg`, `showcase_analytics.jpg`, `showcase_followup.jpg`, `showcase_integracoes.jpg`). A imagem à direita agora troca com um **crossfade animado** (fade + leve zoom, via `AnimatePresence`/`framer-motion`) sincronizado com o tópico ativo do accordion.
+- Seção movida de lugar na Home a pedido do cliente: `ProductShowcase` ("Todas as soluções em uma interface simples") agora vem **antes** de `SocialProof` ("Resultados reais de quem já usa a Zeeps"), não depois.
 
 ---
 
@@ -182,7 +190,9 @@ Sequência pensada por **dependência técnica** (fundação primeiro) e **impac
 - `src/pages/Institucional.tsx` (reescrito do zero): Hero ("De um problema interno a uma plataforma completa") → **Nossos Números** (4 stats) → **Pilares e Valores** (4 cards) → **Trajetória** (timeline vertical 2018→2026 + visão 2028) → feed do Instagram (reaproveitado do `About.tsx`).
 - **Trajetória** montada com o texto real que você mandou (2018 na íntegra; 2020 veio cortado em "Integração oficial ..." — completei de forma plausível com "...com a API do WhatsApp Business", mas fica pendente confirmar a redação exata). Os anos **2022, 2023, 2025 e 2026 são inventados** a seu pedido, marcados com `TODO` no código. Adicionei também um marco de **2028** com visual diferenciado (contorno tracejado, badge "Visão") representando a meta de liderança já mencionada em `About.tsx` — não é fato consumado, é aspiracional.
   - 2026 veio marcado com badge "Hoje" (coerente com a data atual).
-- ⚠️ **Nossos Números são placeholder/inventados** (2018 fundação, 45+ colaboradores, 12 estados, 2 escritórios) e **Pilares e Valores** foram derivados do texto de missão que já existia em `About.tsx` (Transparência, Inovação contínua, Foco no cliente, Simplicidade) — ambos marcados com `TODO`, pendentes dos dados reais.
+- ⚠️ **Nossos Números eram placeholder/inventados** (2018 fundação, 45+ colaboradores, 12 estados, 2 escritórios) e **Pilares e Valores** foram derivados do texto de missão que já existia em `About.tsx` (Transparência, Inovação contínua, Foco no cliente, Simplicidade).
+  - **Retoque pós-entrega (dados reais):** os 4 stats inventados foram trocados pelos **2 números reais** fornecidos (+22 mil mensagens processadas, +6,5 mil atendimentos), grid ajustado de 4 para 2 colunas. Abaixo, adicionadas **2 frases institucionais** também fornecidas pelo cliente (parceria oficial Meta® / atuação em todo o país e segmentos). Pilares e Valores permanecem como estavam (dado não fornecido nesta rodada).
+  - **Retoque pós-entrega (imagem real):** a Hero virou layout de 2 colunas — texto à esquerda, imagem `institucional_hero.png` (aperto de mão com moldura da logo Zeeps, fornecida pelo cliente) à direita.
 - `About.tsx` foi **removido** (conteúdo/estilo migrado para a nova página) e sua seção tirada da Home (`Index.tsx`) — a Home não tinha mais motivo para manter uma seção "Sobre" completa agora que existe a página dedicada.
 - Testado no preview: navegação Home → Institucional, timeline, badges "Hoje"/"Visão" e feed do Instagram carregando normalmente, sem erros no console.
 
@@ -211,6 +221,7 @@ Sequência pensada por **dependência técnica** (fundação primeiro) e **impac
 - Adicionado um `useEffect` que rola manualmente até a âncora quando a página carrega com um hash na URL (ex: `/funcionalidades#agentes-ia`) — o scroll automático nativo do navegador não é confiável aqui porque o conteúdo é renderizado pelo React só depois do carregamento inicial da página.
 - Na seção **Integrações**, abaixo do elemento visual, adicionado um grid com os ícones/logos das 8 integrações nativas já usadas na Home (`src/data/integracoes.ts` — TOTVS, RD Station, Meta, Shopify, Vtex, Bling, Tiny, Mercado Livre).
 - Testado o fluxo completo: clicar em "Saiba mais" na tabela de Planos navega para `/funcionalidades#<slug>` e rola automaticamente até a seção certa.
+- **Retoque pós-entrega (imagem real):** Page Hero virou layout de 2 colunas — texto à esquerda, imagem `funcionalidades_hero.png` (time trabalhando com a marca Zeeps) à direita. ⚠️ Cliente pediu pra trocar essa imagem por outra enviada na conversa — ver observação no fim do documento, pendente de receber o arquivo numa pasta acessível.
 
 ---
 
@@ -287,17 +298,37 @@ Sequência pensada por **dependência técnica** (fundação primeiro) e **impac
 
 ---
 
+### 🎨 Retoque visual pós-entrega — elementos decorativos da marca
+
+Duas variantes fornecidas pelo cliente (fragmentos em verde da marca), usadas como decoração de canto (baixa intrusão, atrás do conteúdo). A orientação da imagem determina em qual canto ela é aplicada:
+- `elements_green.png` → cantos **inferior direito**
+- `elements_green_top_left.png` (arquivo original: `elements_green - esquerda_superior.png`) → cantos **superior esquerdo**
+
+Posições atuais:
+- Home → "Recursos Exclusivos" / `Features.tsx` — superior esquerdo (variante top-left)
+- Home → "Todas as soluções em uma interface simples" / `ProductShowcase.tsx` — superior esquerdo (variante top-left)
+- Home → "Resultados reais de quem já usa a Zeeps" / `SocialProof.tsx` — inferior direito
+- Home → seção de Planos / `PlanosPreview.tsx` — inferior direito
+- `/planos` → Page Hero — superior esquerdo (variante top-left)
+- `/planos` → "Comparativo detalhado" — inferior direito
+
+Também nesta rodada: a ordem das seções na Home foi trocada (`ProductShowcase` antes de `SocialProof`), e as heroes de `/funcionalidades` e `/institucional` ganharam imagem real do cliente ao lado do texto (`funcionalidades_hero.png` e `institucional_hero.png`).
+
+⚠️ **Pendente:** o cliente enviou uma nova versão da imagem da Hero de Funcionalidades diretamente no chat, mas ela não chega como arquivo acessível no projeto (só o conteúdo visual). Assim que ele salvar o arquivo em `unified-connect/src/assets/` (ou em qualquer pasta do projeto), eu troco.
+
+---
+
 ## 5. Materiais que vou precisar de você (consolidado)
 
 Nada disso trava o início — uso **placeholders** e você substitui depois. Mas quanto antes tiver, melhor:
 
-- [ ] URL do **Suporte GLPI** (Ajuste 1) — atenção: é o portal de suporte do cliente final, diferente do "Service Desk GLPI" citado como integração no PDF de planos.
+- [x] URL do **Suporte GLPI** (Ajuste 1) — ✅ **resolvido**: `https://suporte.zeeps.com.br/index.php?noAUTO=1`, link ativo no Header (desktop e mobile).
 - [x] Imagem da Hero (Ajuste 2) — ✅ **resolvido**, usada a imagem enviada (mockup da plataforma), recortada em versão desktop e mobile.
-- [ ] Números da **faixa de confiança** — qtd clientes, % satisfação, volume de dados (Ajuste 2). ⚠️ Por ora estão **inventados** (500+, 98%, 100%, 10M+) só para não deixar a seção vazia — troca simples assim que você mandar os reais.
-- [ ] **Prints** das telas por tópico da interface (Ajuste 3)
+- [x] Números da **faixa de confiança** (Ajuste 2) — ✅ **resolvido**: a seção virou 3 cases de sucesso reais (Fokus, Grupo Pérola, Milhão Ingredients) com logo, estatística, resultado e diferencial de cada um, substituindo os números agregados inventados.
+- [x] **Prints** das telas por tópico da interface (Ajuste 3) — ✅ **resolvido**: 6 screenshots reais da plataforma, um por tópico da seção "Todas as soluções em uma interface simples".
 - [ ] **Lista de segmentos** + textos/imagens por segmento (Ajuste 4)
 - [x] Funcionalidades nativas por **integração** (Ajuste 5) — ✅ **resolvido** via `SITE - integrações e planos.pdf` (TOTVS Protheus/Winthor, RD CRM/MKT, Pipedrive, Ploomes, Jira, GLPI, API/Webhook/BD, IA nativa vs. IA própria do cliente)
-- [ ] **Números/pilares/trajetória** institucionais (Ajuste 6)
+- [x] **Números/pilares/trajetória** institucionais (Ajuste 6) — ✅ **parcialmente resolvido**: "Nossos números" agora usa os valores reais (+22 mil mensagens processadas, +6,5 mil atendimentos) + 2 frases institucionais (parceria Meta®, atuação nacional). Pilares e trajetória continuam com o conteúdo definido no Ajuste 6.
 - [ ] **GIFs/vídeos** curtos das telas (Ajuste 7)
 - [x] **Tabela de preços** e matriz de recursos por plano (Ajuste 8) — ✅ **resolvido** via `Planos.jpg` + PDF (Básico, Intermediário, Business — setup, mensalidade e recursos por plano)
 - [ ] **Depoimentos reais** — texto, nome, cargo, foto/logo (Ajuste 10)

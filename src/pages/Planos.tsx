@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { Check, Minus, ChevronDown, ExternalLink } from "lucide-react";
 import Layout from "@/components/Layout";
 import Seo from "@/components/Seo";
+import elementsGreen from "@/assets/elements_green.png";
+import elementsGreenTopLeft from "@/assets/elements_green_top_left.png";
 
 // Preços, limites e recursos abaixo são os valores reais fornecidos pelo
 // cliente (Planos.jpg / "SITE - integrações e planos.pdf") — ver Ajuste 8 no
@@ -150,8 +152,14 @@ const Planos = () => {
         path="/planos"
       />
       {/* Page Hero Comercial */}
-      <section className="py-16 lg:py-20 bg-gradient-to-b from-primary/5 to-transparent">
-        <div className="container mx-auto px-4 lg:px-8 max-w-3xl text-center">
+      <section className="relative py-16 lg:py-20 bg-gradient-to-b from-primary/5 to-transparent overflow-hidden">
+        <img
+          src={elementsGreenTopLeft}
+          alt=""
+          aria-hidden="true"
+          className="absolute top-0 left-0 w-40 sm:w-56 lg:w-72 pointer-events-none select-none z-0"
+        />
+        <div className="container mx-auto px-4 lg:px-8 max-w-3xl text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -240,8 +248,14 @@ const Planos = () => {
       </section>
 
       {/* Comparativo Detalhado */}
-      <section className="py-16 lg:py-20 bg-[#fafafa]">
-        <div className="container mx-auto px-4 lg:px-8">
+      <section className="relative py-16 lg:py-20 bg-[#fafafa] overflow-hidden">
+        <img
+          src={elementsGreen}
+          alt=""
+          aria-hidden="true"
+          className="absolute bottom-0 right-0 w-32 sm:w-40 lg:w-48 pointer-events-none select-none z-0"
+        />
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

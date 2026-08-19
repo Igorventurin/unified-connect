@@ -17,6 +17,7 @@ import {
 import { integracoes } from "@/data/integracoes";
 import ferramentaVideo from "@/assets/ferramenta.mp4";
 import configZeeps from "@/assets/configurações_zeeps.png";
+import funcionalidadesHero from "@/assets/funcionalidades_hero.png";
 
 type Funcionalidade = FeatureBlock & { Visual: ComponentType };
 
@@ -128,28 +129,45 @@ const Funcionalidades = () => {
         path="/funcionalidades"
       />
       {/* Page Hero */}
-      <section className="py-16 lg:py-20 bg-gradient-to-b from-primary/5 to-transparent">
-        <div className="container mx-auto px-4 lg:px-8 max-w-3xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="inline-block text-sm font-semibold uppercase tracking-widest text-primary mb-4">
-              Funcionalidades
-            </span>
-            <h1 className="text-3xl lg:text-5xl font-bold text-foreground leading-tight">
-              Tudo que sua operação de atendimento precisa,{" "}
-              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                em um só lugar
+      <section className="py-16 lg:py-20 bg-gradient-to-b from-primary/5 to-transparent overflow-hidden">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="flex-1 text-center lg:text-left"
+            >
+              <span className="inline-block text-sm font-semibold uppercase tracking-widest text-primary mb-4">
+                Funcionalidades
               </span>
-            </h1>
-            <p className="mt-6 text-muted-foreground text-lg leading-relaxed">
-              Da inteligência artificial à segurança dos dados, conheça em detalhe cada ferramenta
-              que a Zeeps coloca à disposição da sua equipe.
-            </p>
-          </motion.div>
+              <h1 className="text-3xl lg:text-5xl font-bold text-foreground leading-tight">
+                Tudo que sua operação de atendimento precisa,{" "}
+                <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                  em um só lugar
+                </span>
+              </h1>
+              <p className="mt-6 text-muted-foreground text-lg leading-relaxed">
+                Da inteligência artificial à segurança dos dados, conheça em detalhe cada ferramenta
+                que a Zeeps coloca à disposição da sua equipe.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="flex-1 w-full max-w-md lg:max-w-none"
+            >
+              <img
+                src={funcionalidadesHero}
+                alt="Equipe Zeeps trabalhando na plataforma"
+                className="w-full h-auto rounded-2xl shadow-soft"
+              />
+            </motion.div>
+          </div>
         </div>
       </section>
 

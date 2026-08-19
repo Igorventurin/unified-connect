@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Check, ShieldCheck } from "lucide-react";
+import elementsGreen from "@/assets/elements_green.png";
 
 // Preços e limites reais, fornecidos pelo cliente (Planos.jpg / SITE - integrações
 // e planos.pdf — ver Ajuste 8 no PLANEJAMENTO_AJUSTES.md).
@@ -48,8 +49,14 @@ const planos = [
 
 const PlanosPreview = () => {
   return (
-    <section id="planos" className="py-16 lg:py-20 bg-background">
-      <div className="container mx-auto px-4 lg:px-8">
+    <section id="planos" className="relative py-16 lg:py-20 bg-background overflow-hidden">
+      <img
+        src={elementsGreen}
+        alt=""
+        aria-hidden="true"
+        className="absolute bottom-0 right-0 w-40 sm:w-56 lg:w-72 pointer-events-none select-none z-0"
+      />
+      <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Users, Bot, GitBranch, Code2, Clock, BarChart3 } from "lucide-react";
+import elementsGreenTopLeft from "@/assets/elements_green_top_left.png";
 
 const features = [
   {
@@ -52,6 +53,12 @@ const Features = () => {
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[100px] -z-10 translate-x-1/2 -translate-y-1/2 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-[80px] -z-10 -translate-x-1/3 translate-y-1/3 pointer-events-none" />
+      <img
+        src={elementsGreenTopLeft}
+        alt=""
+        aria-hidden="true"
+        className="absolute top-0 left-0 w-32 sm:w-40 lg:w-48 pointer-events-none select-none z-0"
+      />
 
       <div className="container mx-auto px-4 lg:px-8 z-10 relative">
         <motion.div
