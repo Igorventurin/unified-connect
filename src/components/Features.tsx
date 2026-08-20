@@ -89,7 +89,7 @@ const Features = () => {
         >
           {features.map((f, i) => (
             <motion.div
-              key={f.title}
+              key={f.label}
               whileHover={{ y: -5, scale: 1.01 }}
               className="group relative bg-[#fdfdfd] dark:bg-zinc-900 border border-border/60 hover:border-primary/30 rounded-[2rem] p-6 lg:p-8 transition-all duration-300 shadow-[0_4px_24px_-8px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-12px_rgba(0,148,81,0.1)] overflow-hidden"
             >
