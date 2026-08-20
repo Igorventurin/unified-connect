@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import zeepsLogo from "@/assets/zeeps-logo.png";
 import { Facebook, Instagram, Linkedin, LifeBuoy, ChevronDown } from "lucide-react";
+import { segmentos } from "@/data/segmentos";
 
 type SubLink = { label: string; href: string };
 type NavItem =
@@ -11,7 +12,14 @@ type NavItem =
 
 const navItems: NavItem[] = [
   { type: "link", label: "Home", href: "/" },
-  { type: "link", label: "Segmentos", href: "/#segmentos" },
+  {
+    type: "dropdown",
+    label: "Segmentos",
+    items: [
+      ...segmentos.map((s) => ({ label: s.name, href: `/segmentos/${s.slug}` })),
+      { label: "Ver todos os segmentos", href: "/#segmentos" },
+    ],
+  },
   { type: "link", label: "Funcionalidades", href: "/funcionalidades" },
   { type: "link", label: "Planos", href: "/planos" },
   {
@@ -58,8 +66,9 @@ const NavLink = ({
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [desktopDropdownOpen, setDesktopDropdownOpen] = useState(false);
-  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
+  // Guardam o label do dropdown aberto (ou null) — há mais de um na nav.
+  const [desktopDropdown, setDesktopDropdown] = useState<string | null>(null);
+  const [mobileDropdown, setMobileDropdown] = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -97,37 +106,38 @@ const Header = () => {
               <div
                 key={item.label}
                 className="relative"
-                onMouseEnter={() => setDesktopDropdownOpen(true)}
-                onMouseLeave={() => setDesktopDropdownOpen(false)}
+                onMouseEnter={() => setDesktopDropdown(item.label)}
+                onMouseLeave={() => setDesktopDropdown(null)}
               >
                 <button
                   type="button"
                   className={`flex items-center gap-1 ${linkClass}`}
-                  aria-expanded={desktopDropdownOpen}
+                  aria-expanded={desktopDropdown === item.label}
                 >
                   {item.label}
                   <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-200 ${desktopDropdownOpen ? "rotate-180" : ""}`}
+                    className={`w-4 h-4 transition-transform duration-200 ${desktopDropdown === item.label ? "rotate-180" : ""}`}
                   />
                 </button>
                 <AnimatePresence>
-                  {desktopDropdownOpen && (
+                  {desktopDropdown === item.label && (
                     <motion.div
                       initial={{ opacity: 0, y: -8 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -8 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 pt-3 min-w-[180px] z-50"
+                      className="absolute top-full left-1/2 -translate-x-1/2 pt-3 min-w-[220px] z-50"
                     >
                       <div className="bg-white rounded-xl shadow-card border border-border py-2 overflow-hidden">
                         {item.items.map((sub) => (
-                          <Link
+                          <NavLink
                             key={sub.href}
-                            to={sub.href}
-                            className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                            href={sub.href}
+                            onClick={() => setDesktopDropdown(null)}
+                            className="block whitespace-nowrap px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
                           >
                             {sub.label}
-                          </Link>
+                          </NavLink>
                         ))}
                       </div>
                     </motion.div>
@@ -207,17 +217,17 @@ const Header = () => {
               <div key={item.label}>
                 <button
                   type="button"
-                  onClick={() => setMobileDropdownOpen((v) => !v)}
+                  onClick={() => setMobileDropdown((v) => (v === item.label ? null : item.label))}
                   className="w-full flex items-center justify-between py-3 text-base font-medium text-muted-foreground hover:text-foreground"
-                  aria-expanded={mobileDropdownOpen}
+                  aria-expanded={mobileDropdown === item.label}
                 >
                   {item.label}
                   <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-200 ${mobileDropdownOpen ? "rotate-180" : ""}`}
+                    className={`w-4 h-4 transition-transform duration-200 ${mobileDropdown === item.label ? "rotate-180" : ""}`}
                   />
                 </button>
                 <AnimatePresence initial={false}>
-                  {mobileDropdownOpen && (
+                  {mobileDropdown === item.label && (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
@@ -226,17 +236,17 @@ const Header = () => {
                       className="overflow-hidden pl-4"
                     >
                       {item.items.map((sub) => (
-                        <Link
+                        <NavLink
                           key={sub.href}
-                          to={sub.href}
+                          href={sub.href}
                           onClick={() => {
                             setMobileOpen(false);
-                            setMobileDropdownOpen(false);
+                            setMobileDropdown(null);
                           }}
                           className="block py-2.5 text-sm text-muted-foreground hover:text-foreground"
                         >
                           {sub.label}
-                        </Link>
+                        </NavLink>
                       ))}
                     </motion.div>
                   )}

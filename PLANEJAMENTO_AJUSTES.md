@@ -120,6 +120,11 @@ Sequência pensada por **dependência técnica** (fundação primeiro) e **impac
 - Também corrigido um bug pré-existente nos CTAs da Hero (`href="#contato"` e `href="#produto"` sem barra inicial, que quebrariam a navegação vindo de outra página) → agora `/#contato` e `/#produto`.
 - Testado no preview: desktop (800px e 1440px) e mobile, sem erros no console.
 
+**Retoque pós-entrega (nova Hero, a pedido do cliente):** a imagem de fundo de tela cheia (`hero_mockup.png` / `hero_mockup_mobile.png`) foi **removida**. A Hero virou layout de 2 colunas sobre um **gradiente horizontal** (`#ffffff` de 0% a 50% → `#EBF1E9` em 100%): texto à esquerda, colagem `hero_collage.png` à direita, sem moldura nem sombra.
+- ⚠️ O PNG enviado (`imagem_hero.png`) tinha canal alpha mas com **fundo branco opaco**, o que criava um retângulo branco visível sobre o gradiente. Rodei um *flood fill* a partir das bordas para tornar transparente só o branco conectado à borda (28,8% dos pixels), preservando os brancos internos das fotos e das pílulas. O arquivo em `src/assets/hero_collage.png` é essa versão tratada; o original segue intacto na raiz do projeto.
+- Proporção da coluna da imagem aumentada em ~10% **apenas no desktop** (`lg:flex-[1.35]`), sem afetar o mobile.
+- 🐛 Corrigido de passagem um bug que eu tinha introduzido em `Features.tsx`: o `key` do map ainda usava `f.title`, campo renomeado para `label`/`lead` numa rodada anterior — gerava `undefined` e um warning de "unique key prop" do React no console.
+
 **Retoque pós-entrega (dados reais do cliente):** `SocialProof.tsx` foi reescrito novamente, trocando as 4 métricas agregadas inventadas por **3 cases de sucesso reais** — Fokus, Grupo Pérola e Milhão Ingredients — cada card com logo, headline, estatística/destaque e os campos Resultado (ou Funcionalidades, no caso da Milhão) e Diferencial. ⚠️ O campo "Impacto" citado no material do cliente não veio com texto próprio para nenhum dos 3 casos, então os cards mostram só 2 campos — se houver um texto específico para "Impacto", é só enviar que eu adiciono.
 
 ---
@@ -146,15 +151,22 @@ Sequência pensada por **dependência técnica** (fundação primeiro) e **impac
 ---
 
 ### 🔧 Ajuste 4 — Home: Segmentação + Página de Segmentos (template)
-**Status:** ⏭️ **PULADO por enquanto — PENDENTE, retomar depois dos demais ajustes.**
 **Objetivo:** vitrine de segmentos na Home que abre subpáginas detalhadas (modelo RD Station).
 **Ações:**
-1. Seção de **cards de Segmentos** na Home; clique leva a `/segmentos/:slug`.
-2. Criar o **template reaproveitável** de segmento: Hero (título, subtítulo, imagem do setor, CTA) → Solução (título, subtítulo, **4 cards**) → Resultados (métricas de ROI) → Footer.
-3. Popular com os segmentos reais (dados vindos de você).
-**Arquivos:** `Index.tsx` (nova seção), `src/pages/Segmento.tsx`, `src/data/segmentos.ts` (conteúdo).
-**Preciso de você:** **lista dos segmentos** que a Zeeps atende + textos/imagens por segmento.
-**Entrega:** Home lista segmentos; cada card abre uma subpágina no template padrão.
+1. ✅ Seção de **cards de Segmentos** na Home; clique leva a `/segmentos/:slug`.
+2. ✅ Criar o **template reaproveitável** de segmento: Hero (título, subtítulo, imagem do setor, CTA) → Solução (título, subtítulo, **4 cards**) → Resultados → Footer.
+3. ✅ Popular com os **5 segmentos reais** (dor + solução + imagens fornecidas pelo cliente).
+**Arquivos:** `Index.tsx` (nova seção), `src/components/Segmentos.tsx` (novo), `src/pages/Segmento.tsx` (template), `src/data/segmentos.ts` (conteúdo), `Header.tsx`, `Footer.tsx`.
+**Entrega:** ✅ **Concluído** — Home lista segmentos; cada card abre uma subpágina no template padrão.
+**Status:** ✅ **Concluído**
+- `src/data/segmentos.ts` (novo): todo o conteúdo dos 5 segmentos em um só lugar (nome, imagem, hero, dor, 4 cards de solução, resultados, descrição de SEO). Adicionar/editar segmento = mexer só neste arquivo.
+  - Segmentos e slugs: **Agronegócio** (`/segmentos/agronegocio`), **Atacado e Indústria** (`/segmentos/atacado-industria`), **Varejo e Autopeças** (`/segmentos/varejo-autopecas`), **Serviços e Tecnologia** (`/segmentos/servicos-tecnologia`), **Saúde e Educação** (`/segmentos/saude-educacao`).
+  - Os trechos que se repetiam **igual em todos os 5 segmentos** no texto enviado (acompanhamento em tempo real das conversas do vendedor, acompanhamento das negociações do comprador com o fornecedor e ligações com áudio + transcrição, todos sob LGPD) foram extraídos para uma constante `recursosComuns` e viraram uma **faixa própria** no template ("Rastreabilidade e LGPD em toda a operação"), para as 5 páginas não parecerem copy-paste uma da outra.
+- `src/components/Segmentos.tsx` (novo): seção `#segmentos` na Home, entre Funcionalidades e Planos. 5 cards com foto real do setor (imagens fornecidas), nome com ícone sobre a imagem e chamada curta + 6º card "Não encontrou o seu segmento?" com CTA para `/contato`.
+- `src/pages/Segmento.tsx` (reescrito, era placeholder "Em construção"): template padrão → **Hero** (badge do segmento, título com destaque em gradiente, subtítulo, imagem do setor, CTA "Conhecer a solução completa" + "Ver funcionalidades") → **O desafio** (a dor, com 3 pontos) → **A solução** (4 cards, como pedido no documento) → **Rastreabilidade e LGPD** (faixa comum) → **Resultados** → **Outros segmentos** (navegação cruzada) → **CTA final**. Slug inválido cai no 404.
+- `Header.tsx`: o item "Segmentos" deixou de ser âncora e virou **dropdown** com os 5 segmentos + "Ver todos os segmentos" (âncora para a seção da Home). O estado dos dropdowns passou de booleano para o label do menu aberto — antes, com dois dropdowns na nav, "Segmentos" e "Empresa" abririam juntos.
+- `Footer.tsx`: link "Segmentos" adicionado aos Links Rápidos.
+- ⚠️ **Resultados sem número:** o documento previa "métricas de ROI", mas nenhum número por segmento foi fornecido. A seção está montada com resultados **qualitativos** (o que muda na operação), derivados do próprio texto enviado — nada inventado. Quando os números reais chegarem, é só trocar em `resultados` no arquivo de dados (há um `TODO` marcando isso).
 
 ---
 
@@ -326,7 +338,7 @@ Nada disso trava o início — uso **placeholders** e você substitui depois. Ma
 - [x] Imagem da Hero (Ajuste 2) — ✅ **resolvido**, usada a imagem enviada (mockup da plataforma), recortada em versão desktop e mobile.
 - [x] Números da **faixa de confiança** (Ajuste 2) — ✅ **resolvido**: a seção virou 3 cases de sucesso reais (Fokus, Grupo Pérola, Milhão Ingredients) com logo, estatística, resultado e diferencial de cada um, substituindo os números agregados inventados.
 - [x] **Prints** das telas por tópico da interface (Ajuste 3) — ✅ **resolvido**: 6 screenshots reais da plataforma, um por tópico da seção "Todas as soluções em uma interface simples".
-- [ ] **Lista de segmentos** + textos/imagens por segmento (Ajuste 4)
+- [x] **Lista de segmentos** + textos/imagens por segmento (Ajuste 4) — ✅ **resolvido**: 5 segmentos com dor, solução e imagem do setor (Agronegócio, Atacado e Indústria, Varejo e Autopeças, Serviços e Tecnologia, Saúde e Educação). Falta só número/ROI por segmento para a seção de Resultados.
 - [x] Funcionalidades nativas por **integração** (Ajuste 5) — ✅ **resolvido** via `SITE - integrações e planos.pdf` (TOTVS Protheus/Winthor, RD CRM/MKT, Pipedrive, Ploomes, Jira, GLPI, API/Webhook/BD, IA nativa vs. IA própria do cliente)
 - [x] **Números/pilares/trajetória** institucionais (Ajuste 6) — ✅ **parcialmente resolvido**: "Nossos números" agora usa os valores reais (+22 mil mensagens processadas, +6,5 mil atendimentos) + 2 frases institucionais (parceria Meta®, atuação nacional). Pilares e trajetória continuam com o conteúdo definido no Ajuste 6.
 - [ ] **GIFs/vídeos** curtos das telas (Ajuste 7)
@@ -357,7 +369,7 @@ Nada disso trava o início — uso **placeholders** e você substitui depois. Ma
 | 1 | Fundação: arquitetura + Header/Footer | ✅ Concluído |
 | 2 | Home: Hero + Prova Social | ✅ Concluído |
 | 3 | Home: Funcionalidades + Interface | ⬜ Pendente |
-| 4 | Home: Segmentação + template Segmentos | ⬜ Pendente |
+| 4 | Home: Segmentação + template Segmentos | ✅ Concluído |
 | 5 | Home: Planos + Integrações (TOTVS) | ⬜ Pendente |
 | 6 | Página Institucional | ⬜ Pendente |
 | 7 | Página Funcionalidades | ⬜ Pendente |

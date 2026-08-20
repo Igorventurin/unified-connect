@@ -5,6 +5,7 @@ import LogoCarousel from "@/components/LogoCarousel";
 import SocialProof from "@/components/SocialProof";
 import ProductShowcase from "@/components/ProductShowcase";
 import Features from "@/components/Features";
+import Segmentos from "@/components/Segmentos";
 import PlanosPreview from "@/components/PlanosPreview";
 import Integrations from "@/components/Integrations";
 import Testimonials from "@/components/Testimonials";
@@ -29,6 +30,7 @@ const Index = () => {
         <ProductShowcase />
         <SocialProof />
         <Features />
+        <Segmentos />
         <PlanosPreview />
         <Integrations />
         <Testimonials />
