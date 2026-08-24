@@ -127,6 +127,18 @@ Sequência pensada por **dependência técnica** (fundação primeiro) e **impac
 
 **Retoque pós-entrega (dados reais do cliente):** `SocialProof.tsx` foi reescrito novamente, trocando as 4 métricas agregadas inventadas por **3 cases de sucesso reais** — Fokus, Grupo Pérola e Milhão Ingredients — cada card com logo, headline, estatística/destaque e os campos Resultado (ou Funcionalidades, no caso da Milhão) e Diferencial. ⚠️ O campo "Impacto" citado no material do cliente não veio com texto próprio para nenhum dos 3 casos, então os cards mostram só 2 campos — se houver um texto específico para "Impacto", é só enviar que eu adiciono.
 
+**Retoque pós-entrega (vídeo de depoimento):** ordem dos cards trocada para **Fokus · Milhão · Grupo Pérola** (Milhão no meio) e, só no card da Milhão, os campos Funcionalidades/Diferencial deram lugar ao **vídeo de depoimento** do cliente (`src/assets/feedback_milhao.mp4`, vertical 1080x1920, ~1min12s), usando o `VideoPlayer` já existente. Altura do vídeo fixada em **360px** (a primeira versão usava `flex-1` + `h-full` e esticava para 530px, forçando os 3 cards a 820px e deixando muito espaço vazio nos laterais — agora os cards ficam em 705px).
+
+**Retoque pós-entrega (autor + modal do vídeo):** no card, o vídeo virou uma **prévia clicável** (primeiro frame + botão de play) com a assinatura **Diogo / Gerente de TI** logo abaixo. O clique abre um **modal** (`Dialog`) com o vídeo em tamanho normal — proporção 9:16 original e `object-contain`, garantindo que **nada seja cortado** — repetindo a assinatura no rodapé do modal. Antes o player ficava embutido no card com `object-cover`, o que cortava as laterais do vídeo vertical.
+
+**Retoque pós-entrega (gráficos animados nos cards):** novo `src/components/CaseCharts.tsx` com dois gráficos de tipos diferentes, ambos em verde da marca e animados ao entrar na tela:
+- **Fokus — `AgilidadeGauge`:** arco semicircular (SVG) que preenche até 60%, em degradê `secondary → primary`, com o número **+60%** contando de 0 a 60 no centro do arco.
+- **Grupo Pérola — `InadimplenciaBars`:** duas barras horizontais comparando a inadimplência **antes (63%) e depois (33%)**, com larguras proporcionais aos valores e a barra "Depois" em `gradient-primary`.
+
+⚠️ **Nenhum dado foi inventado nos gráficos** — o gauge do Fokus usa o próprio "+60%" do material e as barras do Pérola usam os dois percentuais reais (63% → 33%). Como o material não trazia série histórica, evitei gráficos de linha/evolução que exigiriam valores intermediários fictícios.
+
+🐛 *Detalhe técnico:* a primeira versão usava `whileInView` do framer-motion e as animações não disparavam (os gráficos ficam no rodapé do card, e o observer não acionava de forma confiável). Trocado por `useInView` + `animate` explícito, que funciona de forma previsível.
+
 ---
 
 ### 🔧 Ajuste 3 — Home: Resumo de Funcionalidades + Interface do Produto
@@ -307,6 +319,17 @@ Sequência pensada por **dependência técnica** (fundação primeiro) e **impac
 - ⚠️ **O WordPress ainda não está publicado** em `blog.zeeps.com.br` — testado no preview e confirmado que, enquanto isso, a página mostra o aviso "O blog ainda não está no ar" de forma elegante (sem tela em branco ou erro feio), tanto na listagem quanto no post individual. Assim que o WordPress subir, os posts aparecem automaticamente, sem precisar mexer no código.
 
 > Combinado: este era o **último ajuste numerado** da fila (1 a 11) — falta retomar o **Ajuste 4** (Segmentação), combinado para ser feito por último.
+
+---
+
+### 🗃️ Seção desativada (guardada para possível retorno) — "O que nossos parceiros dizem"
+
+A pedido do cliente, a seção de depoimentos foi **removida da Home**, mas **nada foi apagado**: o componente continua inteiro em `src/components/Testimonials.tsx`, apenas não é mais renderizado.
+
+**Como ela era:** seção `#depoimentos` com fundo `bg-proof`, título "O que nossos parceiros dizem" + subtítulo "A revolução na comunicação empresarial", 9 depoimentos distribuídos em **3 colunas que rolam verticalmente em loop infinito** (velocidades diferentes: 15s, 19s e 17s), com máscara de degradê no topo/base, cards com avatar redondo + nome + cargo, hover que levanta o card, e um CTA "Falar com consultor" ao final. No mobile mostrava 1 coluna; a 2ª aparecia em `md` e a 3ª em `lg`.
+⚠️ Os 9 depoimentos ali são **fictícios** (nomes e fotos de banco de imagens) — se a seção voltar, o ideal é trocar pelos depoimentos reais antes de publicar.
+
+**Como trazer de volta:** em `src/pages/Index.tsx`, descomentar duas linhas — o `import Testimonials from "@/components/Testimonials";` e o `<Testimonials />` que fica entre `<Integrations />` e `<ContactForm />`. Ambas estão marcadas com comentário explicando isso no próprio arquivo.
 
 ---
 

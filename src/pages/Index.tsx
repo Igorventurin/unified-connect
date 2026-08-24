@@ -8,7 +8,11 @@ import Features from "@/components/Features";
 import Segmentos from "@/components/Segmentos";
 import PlanosPreview from "@/components/PlanosPreview";
 import Integrations from "@/components/Integrations";
-import Testimonials from "@/components/Testimonials";
+// Seção "O que nossos parceiros dizem" desativada a pedido do cliente.
+// O componente segue intacto em `src/components/Testimonials.tsx` — para
+// trazê-la de volta, basta descomentar este import e o <Testimonials />
+// abaixo (entre <Integrations /> e <ContactForm />).
+// import Testimonials from "@/components/Testimonials";
 import ContactForm from "@/components/ContactForm";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
@@ -33,7 +37,7 @@ const Index = () => {
         <Segmentos />
         <PlanosPreview />
         <Integrations />
-        <Testimonials />
+        {/* <Testimonials /> — desativada a pedido do cliente, ver comentário no import */}
         <ContactForm />
         <FAQ />
       </main>

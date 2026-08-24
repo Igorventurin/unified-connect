@@ -1,8 +1,14 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { Play } from "lucide-react";
 import fokusLogo from "@/assets/case_fokus_logo.png";
 import perolaLogo from "@/assets/case_perola_logo.png";
 import milhaoLogo from "@/assets/case_milhao_logo.svg";
 import elementsGreen from "@/assets/elements_green.png";
+import feedbackMilhao from "@/assets/feedback_milhao.mp4";
+import { VideoPlayer } from "./ui/video-player";
+import { Dialog, DialogContent, DialogTitle } from "./ui/dialog";
+import { AgilidadeGauge, InadimplenciaBars } from "./CaseCharts";
 
 type CaseStudy = {
   slug: string;
@@ -11,13 +17,18 @@ type CaseStudy = {
   headline: string;
   stat?: { value: string; label: string };
   highlight?: string;
-  fields: { label: string; text: string }[];
+  fields?: { label: string; text: string }[];
+  video?: string;
+  author?: { name: string; role: string };
+  chart?: "gauge" | "bars";
 };
 
 // Cases reais fornecidos pelo cliente. O campo "Impacto" citado no material
 // não veio acompanhado de um texto próprio para nenhum dos 3 casos — por
 // isso cada card mostra só Resultado/Funcionalidades + Diferencial. Se
 // "Impacto" tiver um texto específico, é só me passar que eu adiciono.
+// A Milhão fica no meio e, no lugar dos campos de texto, exibe o vídeo de
+// depoimento fornecido pelo cliente.
 const cases: CaseStudy[] = [
   {
     slug: "fokus",
@@ -29,6 +40,16 @@ const cases: CaseStudy[] = [
       { label: "Resultado", text: "Crescimento da demanda suportada sem novas contratações." },
       { label: "Diferencial", text: "Centralização de múltiplos números em apenas um oficial." },
     ],
+    chart: "gauge",
+  },
+  {
+    slug: "milhao",
+    logo: milhaoLogo,
+    logoAlt: "Milhão Ingredients",
+    headline: "Autoatendimento especializado",
+    highlight: "Extrato do produtor, preços de mercado e clima em tempo real.",
+    video: feedbackMilhao,
+    author: { name: "Diogo", role: "Gerente de TI" },
   },
   {
     slug: "perola",
@@ -46,21 +67,13 @@ const cases: CaseStudy[] = [
         text: "Integração total com o atual sistema de gestão, mantendo a comunicação padronizada e contínua.",
       },
     ],
-  },
-  {
-    slug: "milhao",
-    logo: milhaoLogo,
-    logoAlt: "Milhão Ingredients",
-    headline: "Autoatendimento especializado",
-    highlight: "Extrato do produtor, preços de mercado e clima em tempo real.",
-    fields: [
-      { label: "Funcionalidades", text: "Atendimento multilíngue (PT, EN, ES) e escala global." },
-      { label: "Diferencial", text: "Suporte consultivo da Zeeps para evolução constante." },
-    ],
+    chart: "bars",
   },
 ];
 
 const SocialProof = () => {
+  const [videoAberto, setVideoAberto] = useState<CaseStudy | null>(null);
+
   return (
     <section className="relative py-14 lg:py-20 bg-proof overflow-hidden">
       <img
@@ -112,20 +125,86 @@ const SocialProof = () => {
                 <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{c.highlight}</p>
               )}
 
-              <div className="mt-6 pt-6 border-t border-border space-y-4 flex-1">
-                {c.fields.map((f) => (
-                  <div key={f.label}>
-                    <span className="text-xs font-semibold uppercase tracking-wide text-primary">
-                      {f.label}
+              {c.video ? (
+                <div className="mt-6 pt-6 border-t border-border">
+                  {/* Prévia clicável — o vídeo completo (sem corte) abre no modal */}
+                  <button
+                    type="button"
+                    onClick={() => setVideoAberto(c)}
+                    aria-label={`Assistir ao depoimento${c.author ? ` de ${c.author.name}` : ""}`}
+                    className="group relative w-full h-[360px] rounded-xl overflow-hidden border-4 border-primary/10 shadow-lg bg-black block"
+                  >
+                    <video
+                      src={c.video}
+                      muted
+                      playsInline
+                      preload="metadata"
+                      className="w-full h-full object-cover pointer-events-none"
+                    />
+                    <span className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors" />
+                    <span className="absolute inset-0 flex items-center justify-center">
+                      <span className="w-16 h-16 rounded-full gradient-primary flex items-center justify-center shadow-xl shadow-primary/40 group-hover:scale-110 transition-transform">
+                        <Play className="w-7 h-7 text-white fill-current ml-1" />
+                      </span>
                     </span>
-                    <p className="mt-1 text-sm text-foreground/80 leading-relaxed">{f.text}</p>
-                  </div>
-                ))}
-              </div>
+                  </button>
+
+                  {c.author && (
+                    <div className="mt-4 text-center">
+                      <p className="font-bold text-foreground leading-tight">{c.author.name}</p>
+                      <p className="text-sm text-muted-foreground">{c.author.role}</p>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="mt-6 pt-6 border-t border-border space-y-4 flex-1">
+                  {c.fields?.map((f) => (
+                    <div key={f.label}>
+                      <span className="text-xs font-semibold uppercase tracking-wide text-primary">
+                        {f.label}
+                      </span>
+                      <p className="mt-1 text-sm text-foreground/80 leading-relaxed">{f.text}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {c.chart && (
+                <div className="mt-6 pt-6 border-t border-border">
+                  {c.chart === "gauge" ? <AgilidadeGauge /> : <InadimplenciaBars />}
+                </div>
+              )}
             </motion.div>
           ))}
         </div>
       </div>
+
+      {/* Modal do depoimento — vídeo vertical inteiro, sem corte */}
+      <Dialog open={!!videoAberto} onOpenChange={(open) => !open && setVideoAberto(null)}>
+        <DialogContent className="w-auto max-w-[92vw] p-3 sm:p-4 bg-background">
+          {videoAberto?.video && (
+            <>
+              <DialogTitle className="sr-only">
+                Depoimento{videoAberto.author ? ` de ${videoAberto.author.name}` : ""} — {videoAberto.logoAlt}
+              </DialogTitle>
+
+              <VideoPlayer
+                src={videoAberto.video}
+                className="h-[70vh] sm:h-[78vh] w-auto aspect-[9/16] mx-auto rounded-xl border-4 hover:scale-100 [&_video]:object-contain"
+              />
+
+              {videoAberto.author && (
+                <div className="text-center pb-1">
+                  <p className="font-bold text-foreground leading-tight">{videoAberto.author.name}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {videoAberto.author.role} · {videoAberto.logoAlt}
+                  </p>
+                </div>
+              )}
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
