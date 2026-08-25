@@ -157,7 +157,7 @@ const Planos = () => {
           src={elementsGreenTopLeft}
           alt=""
           aria-hidden="true"
-          className="absolute top-0 left-0 w-40 sm:w-56 lg:w-72 pointer-events-none select-none z-0"
+          className="hidden md:block absolute top-0 left-0 w-40 sm:w-56 lg:w-72 pointer-events-none select-none z-0"
         />
         <div className="container mx-auto px-4 lg:px-8 max-w-3xl text-center relative z-10">
           <motion.div
@@ -253,7 +253,7 @@ const Planos = () => {
           src={elementsGreen}
           alt=""
           aria-hidden="true"
-          className="absolute bottom-0 right-0 w-32 sm:w-40 lg:w-48 pointer-events-none select-none z-0"
+          className="hidden md:block absolute bottom-0 right-0 w-32 sm:w-40 lg:w-48 pointer-events-none select-none z-0"
         />
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <motion.div

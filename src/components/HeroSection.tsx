@@ -3,7 +3,7 @@ import heroCollage from "@/assets/hero_collage.png";
 
 const HeroSection = () => {
   return (
-    <section className="relative z-0 min-h-[600px] md:min-h-screen pt-20 flex items-center overflow-hidden">
+    <section className="relative z-0 min-h-[600px] md:min-h-screen pt-32 md:pt-20 pb-12 md:pb-0 flex items-center overflow-hidden">
       {/* Fundo em gradiente: branco até 50% e depois verde-claro à direita */}
       <div
         className="absolute inset-0 -z-10"
@@ -18,7 +18,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="flex-1 max-w-xl"
+            className="flex-1 max-w-xl text-center lg:text-left"
           >
             <h1 className="text-[40px] md:text-5xl xl:text-6xl font-extrabold leading-[1.1] tracking-tight text-foreground">
               Sua comunicação integrada,{" "}
@@ -26,10 +26,10 @@ const HeroSection = () => {
                 sua gestão simplificada.
               </span>
             </h1>
-            <p className="mt-8 text-xl text-muted-foreground max-w-lg leading-relaxed">
+            <p className="mt-8 text-xl text-muted-foreground max-w-lg mx-auto lg:mx-0 leading-relaxed">
               Automatize atendimentos no WhatsApp e Redes Sociais com integração total aos maiores ERPs e CRMs do mercado.
             </p>
-            <div className="mt-10 flex flex-wrap gap-6">
+            <div className="mt-10 flex flex-wrap justify-center lg:justify-start gap-6">
               <a
                 href="/#contato"
                 className="gradient-primary text-primary-foreground px-7 py-3.5 rounded-xl text-base font-bold hover:opacity-90 transition-all hover:scale-105 shadow-soft"

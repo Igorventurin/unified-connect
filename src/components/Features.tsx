@@ -57,7 +57,7 @@ const Features = () => {
         src={elementsGreenTopLeft}
         alt=""
         aria-hidden="true"
-        className="absolute top-0 left-0 w-32 sm:w-40 lg:w-48 pointer-events-none select-none z-0"
+        className="hidden md:block absolute top-0 left-0 w-32 sm:w-40 lg:w-48 pointer-events-none select-none z-0"
       />
 
       <div className="container mx-auto px-4 lg:px-8 z-10 relative">

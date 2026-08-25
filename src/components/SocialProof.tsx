@@ -6,6 +6,7 @@ import perolaLogo from "@/assets/case_perola_logo.png";
 import milhaoLogo from "@/assets/case_milhao_logo.svg";
 import elementsGreen from "@/assets/elements_green.png";
 import feedbackMilhao from "@/assets/feedback_milhao.mp4";
+import feedbackMilhaoPoster from "@/assets/feedback_milhao_poster.jpg";
 import { VideoPlayer } from "./ui/video-player";
 import { Dialog, DialogContent, DialogTitle } from "./ui/dialog";
 import { AgilidadeGauge, InadimplenciaBars } from "./CaseCharts";
@@ -80,7 +81,7 @@ const SocialProof = () => {
         src={elementsGreen}
         alt=""
         aria-hidden="true"
-        className="absolute bottom-0 right-0 w-32 sm:w-40 lg:w-48 pointer-events-none select-none z-0"
+        className="hidden md:block absolute bottom-0 right-0 w-32 sm:w-40 lg:w-48 pointer-events-none select-none z-0"
       />
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <motion.div
@@ -134,11 +135,12 @@ const SocialProof = () => {
                     aria-label={`Assistir ao depoimento${c.author ? ` de ${c.author.name}` : ""}`}
                     className="group relative w-full h-[360px] rounded-xl overflow-hidden border-4 border-primary/10 shadow-lg bg-black block"
                   >
-                    <video
-                      src={c.video}
-                      muted
-                      playsInline
-                      preload="metadata"
+                    {/* Poster estático: no mobile o <video> não renderiza o
+                        primeiro frame só com preload="metadata" e ficava preto. */}
+                    <img
+                      src={feedbackMilhaoPoster}
+                      alt=""
+                      aria-hidden="true"
                       className="w-full h-full object-cover pointer-events-none"
                     />
                     <span className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors" />
@@ -181,7 +183,10 @@ const SocialProof = () => {
 
       {/* Modal do depoimento — vídeo vertical inteiro, sem corte */}
       <Dialog open={!!videoAberto} onOpenChange={(open) => !open && setVideoAberto(null)}>
-        <DialogContent className="w-auto max-w-[92vw] p-3 sm:p-4 bg-background">
+        {/* Largura é a fonte da verdade e a altura deriva dela (o inverso
+            fazia o vídeo estourar a caixa do modal no mobile). O 2º termo do
+            min() limita a largura para que a altura resultante caiba na tela. */}
+        <DialogContent className="w-[min(92vw,calc((88vh-88px)*9/16))] max-w-none max-h-[94vh] p-3 sm:p-4 bg-background">
           {videoAberto?.video && (
             <>
               <DialogTitle className="sr-only">
@@ -190,7 +195,7 @@ const SocialProof = () => {
 
               <VideoPlayer
                 src={videoAberto.video}
-                className="h-[70vh] sm:h-[78vh] w-auto aspect-[9/16] mx-auto rounded-xl border-4 hover:scale-100 [&_video]:object-contain"
+                className="w-full h-auto aspect-[9/16] rounded-xl border-4 hover:scale-100 [&_video]:object-contain"
               />
 
               {videoAberto.author && (

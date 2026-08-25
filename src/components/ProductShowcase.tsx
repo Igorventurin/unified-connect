@@ -62,7 +62,7 @@ const ProductShowcase = () => {
         src={elementsGreenTopLeft}
         alt=""
         aria-hidden="true"
-        className="absolute top-0 left-0 w-32 sm:w-40 lg:w-48 pointer-events-none select-none z-0"
+        className="hidden md:block absolute top-0 left-0 w-32 sm:w-40 lg:w-48 pointer-events-none select-none z-0"
       />
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         {/* Header */}
@@ -123,16 +123,27 @@ const ProductShowcase = () => {
 
                       <AnimatePresence initial={false}>
                         {isActive && (
-                          <motion.p
+                          <motion.div
                             key={`desc-${i}`}
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: "auto" }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.35, ease: "easeInOut" }}
-                            className="text-sm text-muted-foreground mt-2 leading-relaxed overflow-hidden"
+                            className="overflow-hidden"
                           >
-                            {s.desc}
-                          </motion.p>
+                            <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
+                              {s.desc}
+                            </p>
+
+                            {/* No mobile a imagem acompanha o tópico aberto;
+                                no desktop ela continua fixa na coluna da direita. */}
+                            <img
+                              src={s.image}
+                              alt={s.title}
+                              loading="lazy"
+                              className="lg:hidden mt-4 w-full aspect-[4/3] object-cover rounded-xl border border-border shadow-soft bg-white"
+                            />
+                          </motion.div>
                         )}
                       </AnimatePresence>
                     </div>
@@ -148,7 +159,7 @@ const ProductShowcase = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="relative overflow-hidden rounded-2xl border border-border shadow-soft bg-white p-2 aspect-[4/3]"
+            className="hidden lg:block relative overflow-hidden rounded-2xl border border-border shadow-soft bg-white p-2 aspect-[4/3]"
           >
             <AnimatePresence>
               <motion.img

@@ -54,7 +54,7 @@ const PlanosPreview = () => {
         src={elementsGreen}
         alt=""
         aria-hidden="true"
-        className="absolute bottom-0 right-0 w-40 sm:w-56 lg:w-72 pointer-events-none select-none z-0"
+        className="hidden md:block absolute bottom-0 right-0 w-40 sm:w-56 lg:w-72 pointer-events-none select-none z-0"
       />
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <motion.div
